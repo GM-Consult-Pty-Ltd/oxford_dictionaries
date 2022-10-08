@@ -2,20 +2,25 @@
 # Copyright (c) 2022, GM Consult Pty Ltd
 # All rights reserved.
 
-name: dart_package_template
-description: TODO - A short description of your package.
+name: oxford_dictionaries
+description: Dictionary class that uses the Oxford Dictionaries RESTful API.
 version: 0.0.1-1
-repository: https://github.com/GM-Consult-Pty-Ltd/dart_package_template
+repository: https://github.com/GM-Consult-Pty-Ltd/oxford_dictionaries
 homepage: https://github.com/GM-Consult-Pty-Ltd
-issue_tracker: https://github.com/GM-Consult-Pty-Ltd/dart_package_template/issues
+issue_tracker: https://github.com/GM-Consult-Pty-Ltd/oxford_dictionaries/issues
 
 environment:
   sdk: '>=2.17.6 <3.0.0'
 
 dependencies:
   # -----PubDev Packages (in alphabetic order) -----
+  dictosaurus: ^0.0.1
+  gmconsult_dart_core: ^0.0.1
 
 dev_dependencies:
-  gmconsult_dev: ^0.0.2
+  gmconsult_dev: ^0.0.7
+  gmconsult_proprietary: 
+    version: ^0.0.1-5
+    hosted: https://onepub.dev/api/jxxxpsdavu
   lints: ^2.0.0
   test: ^1.21.1

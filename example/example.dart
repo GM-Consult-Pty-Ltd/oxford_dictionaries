@@ -3,7 +3,7 @@
 // All rights reserved
 
 // ignore_for_file: unused_import
-import 'package:dart_package_template/dart_package_template.dart';
+import 'package:oxford_dictionaries/oxford_dictionaries.dart';
 import 'package:gmconsult_dev/gmconsult_dev.dart';
 
 void main() {
@@ -19,7 +19,6 @@ Future<void> _readMeExample() async {
   //
   // print a heading
   print('README.md EXAMPLE');
-  //TODO: README.md example
 }
 
 // Print separator

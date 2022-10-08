@@ -4,13 +4,10 @@ Copyright (c) 2022, GM Consult Pty Ltd
 All rights reserved. 
 -->
 
-# dart_package_template
+[![GM Consult Pty Ltd](https://raw.githubusercontent.com/GM-Consult-Pty-Ltd/oxford_dictionaries/main/assets/images/oxford_dictionaries_logo.png?raw=true "GM Consult Pty Ltd")](https://github.com/GM-Consult-Pty-Ltd)
+## **Dictionary class that uses the Oxford Dictionaries RESTful API.**
 
-[![GM Consult Pty Ltd](https://raw.githubusercontent.com/GM-Consult-Pty-Ltd/dart_package_template/main/assets/images/gmconsult_dev_header.png?raw=true "GM Consult Pty Ltd")](https://github.com/GM-Consult-Pty-Ltd)
-## **TODO: A short description of your package.**
-
-
-TODO: A short description of your package.
+Dictionary class that uses the Oxford Dictionaries RESTful API.
 
 *THIS PACKAGE IS **PRE-RELEASE**, IN ACTIVE DEVELOPMENT AND SUBJECT TO DAILY BREAKING CHANGES.*
 
@@ -34,26 +31,26 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 
 ```yaml
 dependencies:
-  dart_package_template: <latest_version>
+  oxford_dictionaries: <latest_version>
 ```
 
 In your code file add the following import:
 
 ```dart
-import 'package:dart_package_template/dart_package_template.dart';
+import 'package:oxford_dictionaries/oxford_dictionaries.dart';
 ```
 
 TODO: describe usage.
 
 ## API
 
-The [API](https://pub.dev/documentation/dart_package_template/latest/) exposes
+The [API](https://pub.dev/documentation/oxford_dictionaries/latest/) exposes
 
 TODO: describe the API
 
 ## Definitions
 
-The following definitions are used throughout the [documentation](https://pub.dev/documentation/dart_package_template/latest/):
+The following definitions are used throughout the [documentation](https://pub.dev/documentation/oxford_dictionaries/latest/):
 * TODO: add definitions
 
 ## References
@@ -62,7 +59,7 @@ The following definitions are used throughout the [documentation](https://pub.de
 
 ## Issues
 
-If you find a bug please fill an [issue](https://github.com/GM-Consult-Pty-Ltd/dart_package_template/issues).  
+If you find a bug please fill an [issue](https://github.com/GM-Consult-Pty-Ltd/oxford_dictionaries/issues).  
 
 This project is a supporting package for a revenue project that has priority call on resources, so please be patient if we don't respond immediately to issues or pull requests.
 
