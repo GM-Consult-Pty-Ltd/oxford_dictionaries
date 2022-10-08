@@ -4,6 +4,13 @@ Copyright (c) 2022, GM Consult Pty Ltd
 All rights reserved. 
 -->
 
+## 0.0.1-2
+**PRE-RELEASE**
+
+### *Updated*
+* License.
+* Documentation.
+
 ## 0.0.1-1
 **PRE-RELEASE, Initial version**
 
