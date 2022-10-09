@@ -4,6 +4,21 @@ Copyright (c) 2022, GM Consult Pty Ltd
 All rights reserved. 
 -->
 
+*THIS PACKAGE IS **PRE-RELEASE**, IN ACTIVE DEVELOPMENT AND SUBJECT TO DAILY BREAKING CHANGES.*
+
+## 0.0.1-4
+**PRE-RELEASE**
+
+### *Updated*
+* Documentation.
+
+## 0.0.1-3
+**PRE-RELEASE**
+
+### *Updated*
+* License.
+* Documentation.
+
 ## 0.0.1-2
 **PRE-RELEASE**
 
