@@ -1,5 +1,13 @@
-# API Keys for testing
-test/keys
+# BSD 3-Clause License
+# Copyright (c) 2022, GM Consult Pty Ltd
+# All rights reserved. 
+
+# Secret keys.
+test/keys/
+lib/keys/
+
+# Folder with implementation code for testing and examples.
+impl/
 
 # Files and directories created by pub.
 .dart_tool/

@@ -35,19 +35,19 @@ void main() {
       final props = await dictoSaurus.getEntry(term);
 
       // get the defintions
-      final definitions = await dictoSaurus.synonymsOf(term);
+      final definitions = props?.synonymsOf();
 
       // get the synonyms
-      final synonyms = await dictoSaurus.synonymsOf(term);
+      final synonyms = props?.synonymsOf();
 
       // get the antonyms
-      final antonyms = await dictoSaurus.antonymsOf(term);
+      final antonyms = props?.antonymsOf();
 
       // get the inflections
-      final inflections = await dictoSaurus.inflectionsOf(term);
+      final inflections = props?.inflectionsOf();
 
       // get the phrases
-      final phrases = await dictoSaurus.phrasesWith(term);
+      final phrases = props?.phrasesWith();
 
       results.add({
         'Method': 'suggestionsFor("$misspeltterm")',

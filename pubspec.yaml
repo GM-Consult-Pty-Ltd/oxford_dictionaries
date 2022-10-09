@@ -24,3 +24,4 @@ dev_dependencies:
     hosted: https://onepub.dev/api/jxxxpsdavu
   lints: ^2.0.0
   test: ^1.21.1
+  text_indexing: ^0.16.0+2
