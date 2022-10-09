@@ -3,7 +3,6 @@
 // All rights reserved
 
 import 'package:dictosaurus/dictosaurus.dart';
-import 'package:dictosaurus/type_definitions.dart';
 import 'dart:async';
 import 'package:gmconsult_dart_core/dart_core.dart';
 
@@ -12,8 +11,8 @@ import 'package:gmconsult_dart_core/dart_core.dart';
 ///
 /// See: https://developer.oxforddictionaries.com/.
 class OxfordDictionaries
-    with OxfordDictionariesApiMixin, DictionaryMixin
-    implements Dictionary {
+    with OxfordDictionariesApiMixin, DictionaryMixin, ThesaurusMixin
+    implements DictoSaurus {
   //
 
   @override
@@ -31,6 +30,24 @@ class OxfordDictionaries
 
   @override
   final String appKey;
+
+  @override
+  Future<List<String>> expandTerm(String term, [int limit = 10]) async {
+    // TODO: implement expandTerm using the search endpoint
+    return [term];
+  }
+
+  @override
+  Future<List<String>> startsWith(String chars, [int limit = 10]) async {
+    // TODO: implement startsWith using the search endpoint
+    return [];
+  }
+
+  @override
+  Future<List<String>> suggestionsFor(String term, [int limit = 10]) async {
+    // TODO: implement suggestionsFor using the search endpoint
+    return [term];
+  }
 }
 
 extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
@@ -99,10 +116,10 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
     return retVal;
   }
 
-  /// Returns the `id` field of the JSON response as `String?`.
+  /// Returns the `id` field of the Map<String, dynamic> response as `String?`.
   String? get term => this['id'] is String ? this['id'] as String : null;
 
-  /// Returns the `language` field of the JSON response as `String?`.
+  /// Returns the `language` field of the Map<String, dynamic> response as `String?`.
   String? get language =>
       (this['language'] is String ? this['language'] as String : null)
           ?.replaceAll('-', '_');
@@ -122,9 +139,10 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
     return null;
   }
 
-  Iterable<JSON> getJsonList(String fieldName) => this[fieldName] is Iterable
-      ? (this[fieldName] as Iterable).cast<JSON>()
-      : [];
+  Iterable<Map<String, dynamic>> getJsonList(String fieldName) =>
+      this[fieldName] is Iterable
+          ? (this[fieldName] as Iterable).cast<Map<String, dynamic>>()
+          : [];
 
   Iterable<String> getStringList(String fieldName) =>
       this[fieldName] is Iterable
@@ -134,7 +152,7 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
   TermProperties? toTermProperties() {
     final term = this.term;
     String languageCode = '';
-    final Iterable<JSON> results = getJsonList('results');
+    final Iterable<Map<String, dynamic>> results = getJsonList('results');
     if (results.isNotEmpty && term is String) {
       languageCode =
           languageCode.isEmpty ? results.first.language ?? '' : languageCode;
@@ -240,18 +258,17 @@ enum OxFordDictionariesEndpoints {
   inflections
 }
 
-/// A mixin that returns [JSON] responses from the Oxford Dictionaries API.
+/// A mixin that returns [Map<String, dynamic>] responses from the Oxford Dictionaries API.
 ///
 /// See: https://developer.oxforddictionaries.com/.
 abstract class OxfordDictionariesApiMixin implements Dictionary {
   //
 
   @override
-  Future<TermProperties?> getEntry(String term,
-      [bool strictMatch = false]) async {
+  Future<TermProperties?> getEntry(String term) async {
     final sourceLanguage = languageCode.replaceAll('_', '-').toLowerCase();
     final json = await entriesEndPoint(term,
-        sourceLanguage: sourceLanguage, strictMatch: strictMatch);
+        sourceLanguage: sourceLanguage, strictMatch: false);
     if (json != null) {
       final retVal = json.toTermProperties();
       return retVal;
@@ -302,7 +319,7 @@ abstract class OxfordDictionariesApiMixin implements Dictionary {
   ///
   /// More information at:
   /// https://developer.oxforddictionaries.com/documentation#!/Words/get_words_source_lang
-  Future<JSON?> entriesEndPoint(String term,
+  Future<Map<String, dynamic>?> entriesEndPoint(String term,
       {bool strictMatch = false, String sourceLanguage = 'en-us'}) async {
     final languages =
         kLanguagesMap[OxFordDictionariesEndpoints.entries] as Set<String>;

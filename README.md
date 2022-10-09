@@ -4,7 +4,7 @@ Copyright (c) 2022, GM Consult Pty Ltd
 All rights reserved. 
 -->
 
-[![GM Consult Pty Ltd](https://raw.githubusercontent.com/GM-Consult-Pty-Ltd/oxford_dictionaries/main/assets/images/oxford_dictionaries_logo.png?raw=true "GM Consult Pty Ltd")](https://github.com/GM-Consult-Pty-Ltd)
+[![GM Consult Pty Ltd](https://raw.githubusercontent.com/GM-Consult-Pty-Ltd/oxford_dictionaries/doc/assets/images/oxford_dictionaries_logo.png?raw=true "GM Consult Pty Ltd")](https://github.com/GM-Consult-Pty-Ltd)
 ## **Dictionary class that uses the Oxford Dictionaries RESTful API.**
 *Oxford Dictionaries, the Oxford Dictionaries logo, Oxford University Press, OUP, Oxford and/or any other names of products or services provided by Oxford University Press and referred to in this package are either trademarks or registered trademarks of Oxford University Press.*
 
