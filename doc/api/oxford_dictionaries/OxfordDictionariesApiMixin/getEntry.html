@@ -75,14 +75,7 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Future&lt;TermProperties?&gt; getEntry(String term) async {
-  final sourceLanguage = languageCode.replaceAll(&#39;_&#39;, &#39;-&#39;).toLowerCase();
-  final json = await entriesEndPoint(term,
-      sourceLanguage: sourceLanguage, strictMatch: false);
-  if (json != null) {
-    final retVal = json.toTermProperties();
-    return retVal;
-  }
-  return null;
+  return await EntriesEndpoint(languageCode, appId, appKey).getEntry(term);
 }</code></pre>
 </section>
 
@@ -151,7 +144,7 @@ Future&lt;TermProperties?&gt; getEntry(String term) async {
 <footer>
   <span class="no-break">
     oxford_dictionaries
-      0.0.1-4
+      0.0.1-5
   </span>
 
   
