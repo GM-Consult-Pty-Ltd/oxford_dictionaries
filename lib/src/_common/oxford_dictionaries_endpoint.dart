@@ -2,10 +2,12 @@
 // BSD 3-Clause License
 // All rights reserved
 
+import 'package:oxford_dictionaries/src/_index.dart';
+
 /// Enumeration of the `Oxford Dictionaries` API endpoints.
 ///
 /// See: https://developer.oxforddictionaries.com/.
-enum OxFordDictionariesEndpoints {
+enum OxFordDictionariesEndpoint {
   /// Retrieve definitions, pronunciations, example sentences, grammatical
   /// information and word origins.
   entries,
@@ -15,6 +17,12 @@ enum OxFordDictionariesEndpoints {
 
   /// Search for headword matches, translations or synonyms for a word.
   search,
+
+  /// Search for headword matches, translations or synonyms for a word.
+  searchTranslations,
+
+  /// Search for headword matches, translations or synonyms for a word.
+  searchThesaurus,
 
   /// Return translations for a given word.
   translations,
@@ -39,4 +47,11 @@ enum OxFordDictionariesEndpoints {
 
   /// Retrieve all the inflections of a given word.
   inflections
+}
+
+///
+extension OxfordLanguagesEndpointExtension on OxFordDictionariesEndpoint {
+  ///
+  bool languageCodeExists(String sourceLanguage) =>
+      Constants.sourceLanguages[this]?.contains(sourceLanguage) ?? false;
 }

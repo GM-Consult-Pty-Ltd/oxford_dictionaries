@@ -5,8 +5,9 @@
 import 'package:dictosaurus/dictosaurus.dart';
 import 'dart:async';
 import 'package:gmconsult_dart_core/dart_core.dart';
+import 'package:oxford_dictionaries/src/_index.dart';
 import 'endpoints/_index.dart';
-import 'oxford_dictionaries_endpoints.dart';
+import '_common/oxford_dictionaries_endpoint.dart';
 
 /// Implements [Dictionary] with the `Oxford Dictionaries` API as dictionary
 /// provider.
@@ -58,13 +59,30 @@ class OxfordDictionaries
 abstract class OxfordDictionariesApiMixin implements Dictionary {
   //
 
+  /// Returns a [TermProperties] for [term].
   @override
-  Future<TermProperties?> getEntry(String term) async {
-    return await EntriesEndpoint(languageCode, appId, appKey).getEntry(term);
+  Future<TermProperties?> getEntry(String term,
+      [Iterable<TermProperty>? fields]) async {
+    TermProperties? retVal;
+    if (fields == null) {
+      retVal = await EntriesEndpoint.query(term, apiKeys);
+    } else {
+      if (fields.isEmpty) {
+        retVal = await EntriesEndpoint.query(term, apiKeys);
+      }
+      if (fields.contains(TermProperty.synonyms)) {}
+      if (fields.contains(TermProperty.antonyms)) {
+        // query the Thesaurus
+      }
+      if (fields.contains(TermProperty.lemma)) {
+        // query lemma, then check if it needs the other fields
+      }
+      if (fields.contains(TermProperty.stem)) {
+        // query call stemmer function
+      }
+    }
+    return retVal;
   }
-
-  /// The host part of the API request.
-  String get host => 'od-api.oxforddictionaries.com';
 
   /// The `OxfordDictionaries Application ID`.
   ///
@@ -79,52 +97,5 @@ abstract class OxfordDictionariesApiMixin implements Dictionary {
   String get appKey;
 
   /// Returns the [appId] and [appKey] as headers for the HTTP request.
-  Map<String, String> get headers => {'app_id': appId, 'app_key': appKey};
-
-  /// Hashmap of endpoint to valid language codes.
-  static const kLanguagesMap = {
-    OxFordDictionariesEndpoints.entries: {
-      'en-gb',
-      'en-us',
-      'de',
-      'es',
-      'fr',
-      'gu',
-      'hi',
-      'lv',
-      'ro',
-      'sw',
-      'ta'
-    }
-  };
-
-  /// Query the `Entries` endpoint:
-  /// - [term] is the word to query.
-  /// - [strictMatch] specifies whether diacritics must match exactly. If
-  ///   "false", near-homographs for the given word_id will also be selected
-  ///   (e.g., rose matches both rose and rosé; similarly rosé matches both);
-  ///
-  /// More information at:
-  /// https://developer.oxforddictionaries.com/documentation#!/Words/get_words_source_lang
-  Future<Map<String, dynamic>?> entriesEndPoint(String term,
-      {bool strictMatch = false, String sourceLanguage = 'en-us'}) async {
-    final languages =
-        kLanguagesMap[OxFordDictionariesEndpoints.entries] as Set<String>;
-    if (languages.contains(sourceLanguage) && term.isNotEmpty) {
-      final path = 'api/v2/entries/$sourceLanguage/${term.toLowerCase()}';
-      final queryParameters = {'strictMatch': strictMatch.toString()};
-      final json = await JsonApi.instance.get(
-          host: host,
-          path: path,
-          headers: headers,
-          queryParameters: queryParameters,
-          isHttps: true);
-
-      final id = json['id'];
-      if (id == term.toLowerCase()) {
-        return json;
-      }
-    }
-    return null;
-  }
+  Map<String, String> get apiKeys => {'app_id': appId, 'app_key': appKey};
 }

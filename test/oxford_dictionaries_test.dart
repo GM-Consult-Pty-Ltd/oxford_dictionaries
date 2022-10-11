@@ -27,12 +27,13 @@ void main() {
           appId: GMConsultKeys.oxfordDictionariesHeaders['app_id'] as String,
           appKey: GMConsultKeys.oxfordDictionariesHeaders['app_key'] as String);
       // get spelling correction suggestions
-      final corrections = await dictoSaurus.suggestionsFor(misspeltterm, 5);
+      // final corrections = await dictoSaurus.suggestionsFor(misspeltterm, 5);
 
       // expand the term
-      final expansions = await dictoSaurus.expandTerm(term, 5);
+      // final expansions = await dictoSaurus.expandTerm(term, 5);
 
-      final props = await dictoSaurus.getEntry(term);
+      final props =
+          await dictoSaurus.getEntry(term, {TermProperty.definitions});
 
       // get the defintions
       final definitions = props?.synonymsOf();
@@ -49,11 +50,11 @@ void main() {
       // get the phrases
       final phrases = props?.phrasesWith();
 
-      results.add({
-        'Method': 'suggestionsFor("$misspeltterm")',
-        'TestResult': corrections
-      });
-      results.add({'Method': 'expandTerm("$term")', 'TestResult': expansions});
+      // results.add({
+      //   'Method': 'suggestionsFor("$misspeltterm")',
+      //   'TestResult': corrections
+      // });
+      // results.add({'Method': 'expandTerm("$term")', 'TestResult': expansions});
       results.add(
           {'Method': 'definitionsFor("$term")', 'TestResult': definitions});
       results.add({'Method': 'synonymsOf("$term")', 'TestResult': synonyms});

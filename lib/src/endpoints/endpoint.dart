@@ -3,64 +3,66 @@
 // All rights reserved
 
 import 'package:dictosaurus/dictosaurus.dart';
-import '../oxford_dictionaries_endpoints.dart';
+import 'package:gmconsult_dart_core/dart_core.dart';
+import 'package:gmconsult_dart_core/type_definitions.dart';
+import '../_common/oxford_dictionaries_endpoint.dart';
 
 /// An interface for Oxford Dictionaries API endpoints
-abstract class Endpoint {
+abstract class Endpoint extends ApiEndpointBase<TermProperties> {
   //
 
   /// Const default generative constructor.
   const Endpoint();
 
-  /// The ISO language code for the language of a term.
-  String get languageCode;
+  /// The [OxFordDictionariesEndpoint] enumeration of the Endpoint.
+  OxFordDictionariesEndpoint get endpoint;
 
-  /// The host part of the API request.
+  @override
+  HttpProtocol get protocol => HttpProtocol.https;
+
+  /// The ISO language code for the language of a term.
+  String get sourceLanguage;
+
+  /// The term parameter requested from the endpoint.
+  String get term;
+
+  @override
   String get host => 'od-api.oxforddictionaries.com';
 
-  /// The `OxfordDictionaries Application ID`.
-  ///
-  /// Get an Application ID at
-  /// `https://developer.oxforddictionaries.com/documentation/getting_started`
-  String get appId;
+  /// Returns a [TermProperties] from [json] if it contains the required fields.
+  TermProperties? fromJson(Map<String, dynamic> json);
 
-  /// The `OxfordDictionaries Application Key`.
-  ///
-  /// Get an Application Key at
-  /// `https://developer.oxforddictionaries.com/documentation/getting_started`
-  String get appKey;
+  @override
+  Future<TermProperties?> post(TermProperties? obj) =>
+      throw UnimplementedError();
 
-  /// Returns the [appId] and [appKey] as headers for the HTTP request.
-  Map<String, String> get headers => {'app_id': appId, 'app_key': appKey};
+  @override
+  Future<Map<String, dynamic>?> postJson(JSON? json) =>
+      throw UnimplementedError();
 
-  /// Hashmap of endpoint to valid language codes.
-  static const kLanguagesMap = {
-    OxFordDictionariesEndpoints.entries: {
-      'en-gb',
-      'en-us',
-      'de',
-      'es',
-      'fr',
-      'gu',
-      'hi',
-      'lv',
-      'ro',
-      'sw',
-      'ta'
+  @override
+  JsonSerializer<TermProperties> get serializer => throw UnimplementedError();
+
+  /// Returns the JSON for the endpoint
+  @override
+  Future<Map<String, dynamic>?> getJson() async {
+    if (endpoint.languageCodeExists(sourceLanguage) && term.isNotEmpty) {
+      final json = await super.getJson();
+      if (json != null &&
+          json['id'] == term.toLowerCase() &&
+          json['metadata'] is Map) {
+        return json;
+      }
     }
-  };
+    return null;
+  }
+}
 
-  /// Query the endpoint:
-  /// - [term] is the word to query.
-  /// - [strictMatch] specifies whether diacritics must match exactly. If
-  ///   "false", near-homographs for the given word_id will also be selected
-  ///   (e.g., rose matches both rose and rosé; similarly rosé matches both);
-  ///
-  /// More information at:
-  /// https://developer.oxforddictionaries.com/documentation#!/Words/get_words_source_lang
-  Future<Map<String, dynamic>?> getJson(String term,
-      {bool strictMatch = false, String sourceLanguage = 'en-us'});
-
-  /// Returns a [TermProperties] for [term].
-  Future<TermProperties?> getEntry(String term);
+/// Parses the Iterable to a String in the correct format for the endpoint.
+extension ToStringExtensionOnIterable on Iterable<String> {
+  /// Parses the Iterable to a String in the correct format for the endpoint.
+  String get toParameter => toString()
+      .toLowerCase()
+      .replaceAll(RegExp(r'[^a-z,]+'), '')
+      .replaceAll(',', '%2C');
 }

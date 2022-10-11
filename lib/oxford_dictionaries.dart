@@ -13,5 +13,5 @@ export 'src/_index.dart'
     show
         OxfordDictionaries,
         OxfordDictionariesApiMixin,
-        OxFordDictionariesEndpoints;
+        OxFordDictionariesEndpoint;
 export 'package:dictosaurus/dictosaurus.dart';

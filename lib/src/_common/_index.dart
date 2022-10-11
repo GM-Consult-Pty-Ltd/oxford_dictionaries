@@ -2,5 +2,5 @@
 // BSD 3-Clause License
 // All rights reserved
 
-export '_common/_index.dart';
-export 'oxford_dictionaries.dart';
+export 'constants.dart';
+export 'oxford_dictionaries_endpoint.dart';
