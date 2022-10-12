@@ -4,10 +4,7 @@
 
 import 'package:dictosaurus/dictosaurus.dart';
 import 'dart:async';
-import 'package:gmconsult_dart_core/dart_core.dart';
-import 'package:oxford_dictionaries/src/_index.dart';
 import 'endpoints/_index.dart';
-import '_common/oxford_dictionaries_endpoint.dart';
 
 /// Implements [Dictionary] with the `Oxford Dictionaries` API as dictionary
 /// provider.
@@ -74,7 +71,7 @@ abstract class OxfordDictionariesApiMixin implements Dictionary {
       if (fields.contains(TermProperty.antonyms)) {
         // query the Thesaurus
       }
-      if (fields.contains(TermProperty.lemma)) {
+      if (fields.contains(TermProperty.lemmas)) {
         // query lemma, then check if it needs the other fields
       }
       if (fields.contains(TermProperty.stem)) {

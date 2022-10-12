@@ -29,8 +29,8 @@ abstract class Endpoint extends ApiEndpointBase<TermProperties> {
   @override
   String get host => 'od-api.oxforddictionaries.com';
 
-  /// Returns a [TermProperties] from [json] if it contains the required fields.
-  TermProperties? fromJson(Map<String, dynamic> json);
+  // /// Returns a [TermProperties] from [json] if it contains the required fields.
+  // TermProperties? fromJson(Map<String, dynamic> json);
 
   @override
   Future<TermProperties?> post(TermProperties? obj) =>
@@ -49,7 +49,7 @@ abstract class Endpoint extends ApiEndpointBase<TermProperties> {
     if (endpoint.languageCodeExists(sourceLanguage) && term.isNotEmpty) {
       final json = await super.getJson();
       if (json != null &&
-          json['id'] == term.toLowerCase() &&
+          // json['query'].to == term.toLowerCase() &&
           json['metadata'] is Map) {
         return json;
       }
@@ -60,9 +60,85 @@ abstract class Endpoint extends ApiEndpointBase<TermProperties> {
 
 /// Parses the Iterable to a String in the correct format for the endpoint.
 extension ToStringExtensionOnIterable on Iterable<String> {
+  //
+
   /// Parses the Iterable to a String in the correct format for the endpoint.
   String get toParameter => toString()
       .toLowerCase()
       .replaceAll(RegExp(r'[^a-z,]+'), '')
       .replaceAll(',', '%2C');
+}
+
+/// Utiltiy extensions on String to extract data from JSON
+extension EndPointExtensionOnJson on JSON {
+//
+
+  /// Maps the `lexicalCategory` field an element of `[lexicalEntries]`
+  /// as [PartOfSpeech] if it exists.
+  PartOfSpeech? getPoS(String fieldName) {
+    final json = this[fieldName] is Map
+        ? ((this[fieldName]) as Map)
+            .map((key, value) => MapEntry(key.toString(), value))
+        : null;
+    if (json != null) {
+      final value = json['id'];
+      switch (value) {
+        case 'noun':
+          return PartOfSpeech.noun;
+        case 'pronoun':
+          return PartOfSpeech.pronoun;
+        case 'adjective':
+          return PartOfSpeech.adjective;
+        case 'verb':
+          return PartOfSpeech.verb;
+        case 'adverb':
+          return PartOfSpeech.adverb;
+        case 'preposition':
+          return PartOfSpeech.noun;
+        case 'conjunction':
+          return PartOfSpeech.conjunction;
+        case 'interjection':
+          return PartOfSpeech.interjection;
+        case 'article':
+          return PartOfSpeech.article;
+        default:
+          return null;
+      }
+    }
+    return null;
+  }
+
+  /// Maps the [textFieldName] elements of [listFieldName] if the field with
+  /// [listFieldName] exists, is an Iterable of Map and the elements have
+  /// a String field with name [textFieldName].
+  Set<String> getTextValues(String listFieldName, String textFieldName) {
+    final retVal = <String>{};
+    final phrases = getJsonList(listFieldName);
+    for (final json in phrases) {
+      final phrase = json[textFieldName];
+      if (phrase is String) {
+        retVal.add(phrase);
+      }
+    }
+    return retVal;
+  }
+
+  /// Returns the `language` field of the Map<String, dynamic> response as `String?`.
+  String? get language =>
+      (this['language'] is String ? this['language'] as String : null)
+          ?.replaceAll('-', '_');
+
+  /// Return a collection of JSON objects if the field at [fieldName] is an
+  /// iterable of Map.
+  Iterable<Map<String, dynamic>> getJsonList(String fieldName) =>
+      this[fieldName] is Iterable
+          ? (this[fieldName] as Iterable).cast<Map<String, dynamic>>()
+          : [];
+
+  /// Return a collection of Strings if the field at [fieldName] is an
+  /// iterable of String.
+  Iterable<String> getStringList(String fieldName) =>
+      this[fieldName] is Iterable
+          ? (this[fieldName] as Iterable).cast<String>()
+          : [];
 }

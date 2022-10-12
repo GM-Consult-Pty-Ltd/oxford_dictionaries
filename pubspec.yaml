@@ -14,7 +14,7 @@ environment:
 
 dependencies:
   # -----PubDev Packages (in alphabetic order) -----
-  dictosaurus: ^0.0.5
+  dictosaurus: ^0.0.7
   gmconsult_dart_core: ^0.0.2
 
 dev_dependencies:

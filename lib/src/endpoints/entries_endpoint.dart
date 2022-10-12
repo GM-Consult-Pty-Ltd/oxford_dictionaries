@@ -142,10 +142,6 @@ class EntriesEndpoint extends Endpoint {
   }
 
   @override
-  TermProperties? fromJson(Map<String, dynamic> json) =>
-      json.toTermProperties();
-
-  @override
   OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
 
   @override
@@ -155,77 +151,6 @@ class EntriesEndpoint extends Endpoint {
 
 extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
   //
-
-  /// Maps the `lexicalCategory` field an element of `[lexicalEntries]`
-  /// as [PartOfSpeech] if it exists.
-  PartOfSpeech? get poS {
-    final json = this['lexicalCategory'] is Map
-        ? ((this['lexicalCategory']) as Map)
-            .map((key, value) => MapEntry(key.toString(), value))
-        : null;
-    if (json != null) {
-      final value = json['id'];
-      switch (value) {
-        case 'noun':
-          return PartOfSpeech.noun;
-        case 'pronoun':
-          return PartOfSpeech.pronoun;
-        case 'adjective':
-          return PartOfSpeech.adjective;
-        case 'verb':
-          return PartOfSpeech.verb;
-        case 'adverb':
-          return PartOfSpeech.adverb;
-        case 'preposition':
-          return PartOfSpeech.noun;
-        case 'conjunction':
-          return PartOfSpeech.conjunction;
-        case 'interjection':
-          return PartOfSpeech.interjection;
-        case 'article':
-          return PartOfSpeech.article;
-        default:
-          return null;
-      }
-    }
-    return null;
-  }
-
-  /// Maps the `inflections` field an element of [lexicalEntryEntries] to a
-  /// Set of [String] if the field exists.
-  Set<String> get lexicalEntriesEntryInflections {
-    final retVal = <String>{};
-    final collection = getJsonList('inflections');
-    for (final json in collection) {
-      final value = json['inflectedForm'];
-      if (value is String) {
-        retVal.add(value);
-      }
-    }
-    return retVal;
-  }
-
-  /// Maps the `lexicalCategory` field an element of [lexicalEntries]
-  /// as [PartOfSpeech] if it exists.
-  Set<String> getTextValues(String fieldName) {
-    final retVal = <String>{};
-    final phrases = getJsonList(fieldName);
-    for (final json in phrases) {
-      final phrase = json['text'];
-      if (phrase is String) {
-        retVal.add(phrase);
-      }
-    }
-    return retVal;
-  }
-
-  /// Returns the `id` field of the Map<String, dynamic> response as `String?`.
-  String? get term => this['id'] is String ? this['id'] as String : null;
-
-  /// Returns the `language` field of the Map<String, dynamic> response as `String?`.
-  String? get language =>
-      (this['language'] is String ? this['language'] as String : null)
-          ?.replaceAll('-', '_');
 
   /// Returns the first phonetic spelling found in the `pronunciations` field
   /// of an element of `"lexicalEntry" "entries"`.
@@ -242,16 +167,6 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
     return null;
   }
 
-  Iterable<Map<String, dynamic>> getJsonList(String fieldName) =>
-      this[fieldName] is Iterable
-          ? (this[fieldName] as Iterable).cast<Map<String, dynamic>>()
-          : [];
-
-  Iterable<String> getStringList(String fieldName) =>
-      this[fieldName] is Iterable
-          ? (this[fieldName] as Iterable).cast<String>()
-          : [];
-
   TermProperties toTermProperties() {
     final term = this.term;
     String sourceLanguage = '';
@@ -262,26 +177,27 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
           : sourceLanguage;
       final variants = <TermDefinition>{};
       String? stem;
-      String? lemma;
       String? phonetic;
       for (final r in results) {
         final lexicalEntries = r.getJsonList('lexicalEntries');
         for (final le in lexicalEntries) {
-          final partOfSpeech = le.poS;
+          final partOfSpeech = le.getPoS('lexicalCategory');
           final phrases = <String>{};
           if (partOfSpeech != null) {
             final entries = le.getJsonList('entries');
             for (final e in entries) {
-              final inflections = e.lexicalEntriesEntryInflections;
+              final inflections =
+                  e.getTextValues('inflections', 'inflectedForm');
               phonetic = phonetic ?? e.lexicalEntriesEntryPhonetic;
               final senses = e.getJsonList('senses');
               for (final s in senses) {
-                final synonyms = s.getTextValues('synonyms');
+                final synonyms = s.getTextValues('synonyms', 'text');
                 final definitions = s.getStringList('definitions');
                 for (final definition in definitions) {
-                  phrases.addAll(s.getTextValues('examples'));
+                  phrases.addAll(s.getTextValues('examples', 'text'));
                   final variant = TermDefinition(
                       term: term,
+                      lemmas: {},
                       partOfSpeech: partOfSpeech,
                       definition: definition,
                       phrases: phrases,
@@ -294,9 +210,10 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
                 for (final ss in subsenses) {
                   final definitions = ss.getStringList('definitions');
                   for (final definition in definitions) {
-                    phrases.addAll(s.getTextValues('examples'));
+                    phrases.addAll(s.getTextValues('examples', 'text'));
                     final variant = TermDefinition(
                         term: term,
+                        lemmas: {},
                         partOfSpeech: partOfSpeech,
                         definition: definition,
                         phrases: phrases,
@@ -314,15 +231,18 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
       return TermProperties(
           term: term,
           stem: stem ?? term,
-          lemma: lemma ?? term,
           phonetic: phonetic ?? term,
           languageCode: sourceLanguage,
           variants: variants);
     }
-    throw ('The json object does not represent a TermProperties onject.');
+    throw ('The json object does not represent a TermProperties object.');
   }
+
+  /// Returns the `id` field of the Map<String, dynamic> response as `String?`.
+  String? get term => this['id'] is String ? this['id'] as String : null;
 }
 
+// ignore: unused_element
 final _sampleBody = {
   'id': 'ace',
   'metadata': {
@@ -652,7 +572,7 @@ final _sampleBody = {
                       ],
                       'id': 'm_en_gbus0005680.029',
                       'notes': [
-                        {'text': '\"ace someone out\"', 'type': 'wordFormNote'}
+                        {'text': '"ace someone out"', 'type': 'wordFormNote'}
                       ],
                       'shortDefinitions': [
                         'outdo someone in competitive situation'
