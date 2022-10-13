@@ -15,7 +15,21 @@ void main() {
   group('ENDPOINTS', () {
     //
 
-    //
+    test('EntriesEndpoint', () async {
+      // define a term with incorrect spelling.
+      final misspeltterm = 'appel';
+
+      // define a correctly spelled term.
+      final term = 'swim';
+
+      final props = await EntriesEndpoint.query(
+          term, GMConsultKeys.oxfordDictionariesHeaders);
+
+      expect(props != null, true);
+      if (props != null) {
+        _printTermProps(props);
+      }
+    });
 
     test('WordsEndpoint', () async {
       // define a term with incorrect spelling.
@@ -49,14 +63,11 @@ void main() {
       }
     });
 
-    test('EntriesEndpoint', () async {
-      // define a term with incorrect spelling.
-      final misspeltterm = 'appel';
-
+    test('LemmasEndpoint', () async {
       // define a correctly spelled term.
-      final term = 'swim';
+      final term = 'swimming';
 
-      final props = await EntriesEndpoint.query(
+      final props = await LemmasEndpoint.query(
           term, GMConsultKeys.oxfordDictionariesHeaders);
 
       expect(props != null, true);

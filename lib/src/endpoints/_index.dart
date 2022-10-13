@@ -3,4 +3,6 @@
 // All rights reserved
 
 export 'entries_endpoint.dart';
+export 'lemmas_endpoint.dart';
+export 'words_endpoint.dart';
 export 'words_endpoint.dart';
