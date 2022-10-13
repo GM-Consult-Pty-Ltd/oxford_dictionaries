@@ -4,12 +4,16 @@
 
 import 'package:dictosaurus/dictosaurus.dart';
 import 'package:gmconsult_dart_core/dart_core.dart';
+import 'package:porter_2_stemmer/porter_2_stemmer.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import '../_common/oxford_dictionaries_endpoint.dart';
 
 /// An interface for Oxford Dictionaries API endpoints
 abstract class Endpoint extends ApiEndpointBase<TermProperties> {
   //
+
+  /// Uses the [Porter2Stemmer] to return the stem of [term].
+  String get porter2stem => term.stemPorter2();
 
   /// Const default generative constructor.
   const Endpoint();
@@ -51,6 +55,7 @@ abstract class Endpoint extends ApiEndpointBase<TermProperties> {
       if (json != null &&
           // json['query'].to == term.toLowerCase() &&
           json['metadata'] is Map) {
+        json['porter2stem'] = porter2stem;
         return json;
       }
     }
@@ -69,9 +74,43 @@ extension ToStringExtensionOnIterable on Iterable<String> {
       .replaceAll(',', '%2C');
 }
 
+///
+extension EndpointStringExtension on String {
+  //
+
+  /// Normalizes text from the JSON.
+  /// - Change all quote marks to single apostrophe +U0027.
+  /// - Remove enclosing quote marks.
+  /// - Change all dashes to single standard hyphen.
+  String normalize() {
+    return // change all quote marks to single apostrophe +U0027
+        replaceAll(RegExp('[\'"“”„‟’‘‛]+'), "'")
+            // remove enclosing quote marks
+            .replaceAll(RegExp(r"(^'+)|('+(?=$))"), '')
+            // change all dashes to single standard hyphen
+            .replaceAll(RegExp(r'[\-—]+'), '-')
+            .trim();
+  }
+}
+
 /// Utiltiy extensions on String to extract data from JSON
 extension EndPointExtensionOnJson on JSON {
 //
+
+  /// Returns a [Pronunciation]s collection by parsing the 'pronunciations'
+  /// field of the JSON.
+  Set<Pronunciation> pronunciations(String term) =>
+      getJsonList('pronunciations')
+          .map((pronunciation) => Pronunciation(
+              term: term,
+              audioLink: pronunciation['audioFile']?.toString(),
+              phoneticSpelling: pronunciation['phoneticSpelling']?.toString(),
+              languageCodes: pronunciation.getStringList('dialects')))
+          .toSet();
+
+  /// Returns a collection of etymologies by parsing the 'etymologies'
+  /// field of the JSON.
+  Set<String> get etymologies => getStringList('etymologies').toSet();
 
   /// Maps the `lexicalCategory` field an element of `[lexicalEntries]`
   /// as [PartOfSpeech] if it exists.
@@ -115,9 +154,9 @@ extension EndPointExtensionOnJson on JSON {
     final retVal = <String>{};
     final phrases = getJsonList(listFieldName);
     for (final json in phrases) {
-      final phrase = json[textFieldName];
-      if (phrase is String) {
-        retVal.add(phrase);
+      final text = json[textFieldName];
+      if (text is String) {
+        retVal.add(text.normalize());
       }
     }
     return retVal;
@@ -137,8 +176,10 @@ extension EndPointExtensionOnJson on JSON {
 
   /// Return a collection of Strings if the field at [fieldName] is an
   /// iterable of String.
-  Iterable<String> getStringList(String fieldName) =>
-      this[fieldName] is Iterable
-          ? (this[fieldName] as Iterable).cast<String>()
-          : [];
+  Set<String> getStringList(String fieldName) => this[fieldName] is Iterable
+      ? (this[fieldName] as Iterable)
+          .cast<String>()
+          .map((e) => e.normalize())
+          .toSet()
+      : {};
 }

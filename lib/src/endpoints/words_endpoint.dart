@@ -153,21 +153,6 @@ class WordsEndpoint extends Endpoint {
 extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
   //
 
-  /// Returns the first phonetic spelling found in the `pronunciations` field
-  /// of an element of `"lexicalEntry" "entries"`.
-  String? get lexicalEntriesEntryPhonetic {
-    final collection = getJsonList('pronunciations');
-    String? retVal;
-    for (final json in collection) {
-      final value = json['phoneticSpelling'];
-      if (value is String) {
-        retVal = retVal ?? value;
-      }
-      return retVal;
-    }
-    return null;
-  }
-
   /// Returns the `id` field of the Map<String, dynamic> response as `String?`.
   String? get term => this['query'] is String ? this['query'] as String : null;
 
@@ -179,9 +164,9 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
       sourceLanguage = sourceLanguage.isEmpty
           ? results.first.language ?? ''
           : sourceLanguage;
-      final variants = <TermDefinition>{};
-      String? stem;
-      String? phonetic;
+      final variants = <TermVariant>{};
+      final stem = this['porter2stem'] as String;
+
       for (final r in results) {
         final lexicalEntries = r.getJsonList('lexicalEntries');
         for (final le in lexicalEntries) {
@@ -192,7 +177,8 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
             for (final e in entries) {
               final inflections =
                   e.getTextValues('inflections', 'inflectedForm');
-              phonetic = phonetic ?? e.lexicalEntriesEntryPhonetic;
+              final pronunciations = e.pronunciations(term);
+              final etymologies = e.etymologies;
               final senses = e.getJsonList('senses');
               for (final s in senses) {
                 final synonyms = s.getTextValues('synonyms', 'text');
@@ -200,8 +186,10 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
                 final definitions = s.getStringList('definitions');
                 for (final definition in definitions) {
                   phrases.addAll(s.getTextValues('examples', 'text'));
-                  final variant = TermDefinition(
+                  final variant = TermVariant(
                       term: term,
+                      pronunciations: pronunciations,
+                      etymologies: etymologies,
                       partOfSpeech: partOfSpeech,
                       definition: definition,
                       phrases: phrases,
@@ -216,9 +204,12 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
                   final definitions = ss.getStringList('definitions');
                   final lemmas = s.getTextValues('thesaurusLinks', 'entry_id');
                   for (final definition in definitions) {
-                    phrases.addAll(s.getTextValues('examples', 'text'));
-                    final variant = TermDefinition(
+                    phrases.addAll(ss.getTextValues('examples', 'text'));
+                    synonyms.addAll(ss.getTextValues('synonyms', 'text'));
+                    final variant = TermVariant(
                         term: term,
+                        pronunciations: pronunciations,
+                        etymologies: etymologies,
                         partOfSpeech: partOfSpeech,
                         definition: definition,
                         lemmas: lemmas,
@@ -236,8 +227,7 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
       }
       return TermProperties(
           term: term,
-          stem: stem ?? term,
-          phonetic: phonetic ?? term,
+          stem: stem,
           languageCode: sourceLanguage,
           variants: variants);
     }
