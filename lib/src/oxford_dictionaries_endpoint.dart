@@ -2,6 +2,7 @@
 // BSD 3-Clause License
 // All rights reserved
 
+import 'package:gmconsult_dart_core/dart_core.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
 
 /// Enumeration of the `Oxford Dictionaries` API endpoints.
@@ -52,6 +53,6 @@ enum OxFordDictionariesEndpoint {
 ///
 extension OxfordLanguagesEndpointExtension on OxFordDictionariesEndpoint {
   ///
-  bool languageCodeExists(String sourceLanguage) =>
+  bool languageCodeExists(Language sourceLanguage) =>
       Constants.sourceLanguages[this]?.contains(sourceLanguage) ?? false;
 }

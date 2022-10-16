@@ -2,13 +2,15 @@
 // BSD 3-Clause License
 // All rights reserved
 
+import 'package:gmconsult_dart_core/dart_core.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
-import '../_common/oxford_dictionaries_endpoint.dart';
+import 'package:oxford_dictionaries/src/_index.dart';
+import 'package:gmconsult_dart_core/extensions.dart';
 import 'endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
-/// Retrieve definitions, pronunciations, example sentences, grammatical
-/// information and word origins.
+/// retrieve words that are similar/opposite in meaning to the input word
+/// (synonym /antonym).
 class ThesaurusEndpoint extends Endpoint {
 //
 
@@ -26,20 +28,21 @@ class ThesaurusEndpoint extends Endpoint {
           .get();
 
   /// Const default generative constructor.
-  const ThesaurusEndpoint._(this.term, this.headers, String sourceLanguage,
+  ThesaurusEndpoint._(this.term, this.headers, String sourceLanguage,
       this.strictMatch, this.fields)
-      : _sourceLanguage = sourceLanguage;
+      : _sourceLanguage = sourceLanguage.toLocale();
 
   @override
   final String term;
 
   @override
-  String get sourceLanguage =>
-      _sourceLanguage.toLowerCase().replaceAll(RegExp(r'[^a-z]'), '-');
-  final String _sourceLanguage;
+  Language get sourceLanguage => _sourceLanguage;
+
+  final Language _sourceLanguage;
 
   @override
-  String get path => 'api/v2/thesaurus/$sourceLanguage/${term.toLowerCase()}';
+  String get path =>
+      'api/v2/thesaurus/${sourceLanguage.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
 
   @override
   final Map<String, String> headers;

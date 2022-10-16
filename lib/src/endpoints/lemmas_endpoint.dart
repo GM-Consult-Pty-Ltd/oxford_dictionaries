@@ -2,13 +2,27 @@
 // BSD 3-Clause License
 // All rights reserved
 
+import 'package:gmconsult_dart_core/dart_core.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
-import '../_common/oxford_dictionaries_endpoint.dart';
+import 'package:oxford_dictionaries/src/_index.dart';
+import 'package:gmconsult_dart_core/extensions.dart';
 import 'endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
-/// Retrieve definitions, pronunciations, example sentences, grammatical
-/// information and word origins.
+/// Check if a word exists in the dictionary, or what 'root' form it links to
+/// (e.g., swimming > swim). The response tells you the possible lemmas for a
+/// given inflected word. This can then be combined with other endpoints to
+/// retrieve more information.
+///
+/// The results can be filtered by lexicalCategories and/or grammaticalFeatures.
+///
+/// Filters can be combined.
+///
+/// Combining different filters will build a query using 'AND' operators,
+/// while if a filter contains more than one value it will build a query
+/// using 'OR' operators. For example, a combination of filters like
+/// '?grammaticalFeatures=singular&lexicalCategory=noun,verb' will return
+/// entries which match the query ('noun' OR 'verb') AND 'singular'.
 class LemmasEndpoint extends Endpoint {
 //
 
@@ -23,20 +37,21 @@ class LemmasEndpoint extends Endpoint {
           .get();
 
   /// Const default generative constructor.
-  const LemmasEndpoint._(this.term, this.headers, String sourceLanguage,
+  LemmasEndpoint._(this.term, this.headers, String sourceLanguage,
       this.grammaticalFeatures, this.lexicalCategory)
-      : _sourceLanguage = sourceLanguage;
+      : _sourceLanguage = sourceLanguage.toLocale();
 
   @override
   final String term;
 
   @override
-  String get sourceLanguage =>
-      _sourceLanguage.toLowerCase().replaceAll(RegExp(r'[^a-z]'), '-');
-  final String _sourceLanguage;
+  Language get sourceLanguage => _sourceLanguage;
+
+  final Language _sourceLanguage;
 
   @override
-  String get path => 'api/v2/lemmas/$sourceLanguage/${term.toLowerCase()}';
+  String get path =>
+      'api/v2/lemmas/${sourceLanguage.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
 
   @override
   final Map<String, String> headers;

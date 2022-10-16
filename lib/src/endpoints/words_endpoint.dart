@@ -2,8 +2,10 @@
 // BSD 3-Clause License
 // All rights reserved
 
+import 'package:gmconsult_dart_core/dart_core.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
-import '../_common/oxford_dictionaries_endpoint.dart';
+import 'package:oxford_dictionaries/src/_index.dart';
+import 'package:gmconsult_dart_core/extensions.dart';
 import 'endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
@@ -27,7 +29,7 @@ class WordsEndpoint extends Endpoint {
           .get();
 
   /// Const default generative constructor.
-  const WordsEndpoint._(
+  WordsEndpoint._(
       this.term,
       this.headers,
       String sourceLanguage,
@@ -37,18 +39,19 @@ class WordsEndpoint extends Endpoint {
       this.grammaticalFeatures,
       this.lexicalCategory,
       this.domains)
-      : _sourceLanguage = sourceLanguage;
+      : _sourceLanguage = sourceLanguage.toLocale();
 
   @override
   final String term;
 
   @override
-  String get sourceLanguage =>
-      _sourceLanguage.toLowerCase().replaceAll(RegExp(r'[^a-z]'), '-');
-  final String _sourceLanguage;
+  Language get sourceLanguage => _sourceLanguage;
+
+  final Language _sourceLanguage;
 
   @override
-  String get path => 'api/v2/words/$sourceLanguage';
+  String get path =>
+      'api/v2/words/${sourceLanguage.toLanguageTag().toLowerCase()}';
 
   @override
   final Map<String, String> headers;

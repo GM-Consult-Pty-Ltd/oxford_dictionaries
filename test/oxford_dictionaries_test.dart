@@ -4,6 +4,8 @@
 
 // ignore_for_file: unused_import, unused_local_variable
 
+@Timeout(Duration(minutes: 5))
+
 import 'package:oxford_dictionaries/oxford_dictionaries.dart';
 import 'package:gmconsult_proprietary/gmconsult_proprietary.dart';
 import 'package:oxford_dictionaries/src/endpoints/_index.dart';

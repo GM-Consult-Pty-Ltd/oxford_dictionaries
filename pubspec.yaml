@@ -15,12 +15,12 @@ environment:
 dependencies:
   # -----PubDev Packages (in alphabetic order) -----
   dictosaurus: ^0.0.9
-  gmconsult_dart_core: ^0.0.2
+  gmconsult_dart_core: ^0.0.5
   porter_2_stemmer: ^3.0.1
   text_analysis: ^0.16.0
 
 dev_dependencies:
-  gmconsult_dev: ^0.0.7
+  gmconsult_dev: ^0.0.7+4
   gmconsult_proprietary: 
     version: ^0.0.1-5
     hosted: https://onepub.dev/api/jxxxpsdavu

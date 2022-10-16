@@ -2,13 +2,18 @@
 // BSD 3-Clause License
 // All rights reserved
 
+import 'package:gmconsult_dart_core/dart_core.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
-import '../_common/oxford_dictionaries_endpoint.dart';
+import 'package:oxford_dictionaries/src/_index.dart';
+import 'package:gmconsult_dart_core/extensions.dart';
 import 'endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
-/// Retrieve definitions, pronunciations, example sentences, grammatical
+/// Retrieve definitions, pronunciations  example sentences, grammatical
 /// information and word origins.
+///
+/// ONLY works for dictionary headwords. You may need to use the Lemmas endpoint first to link an inflected form back to its headword (e.g., pixels --> pixel). Use filters to limit the entry information that is returned. For example, you may only require definitions and not everything else, or just pronunciations. The full list of filters can be retrieved from the filters Utility endpoint. You can also specify values within the filter using '='. For example 'grammaticalFeatures=singular'. Filters can also be combined.
+/// Combining different filters will build a query using 'AND' operators, while if a filter contains more than one value it will build a query using 'OR' operators. For example, a combination of filters like '?grammaticalFeatures=singular&lexicalCategory=noun,verb' will return entries which match the query ('noun' OR 'verb') AND 'singular'.
 class EntriesEndpoint extends Endpoint {
 //
 
@@ -27,7 +32,7 @@ class EntriesEndpoint extends Endpoint {
           .get();
 
   /// Const default generative constructor.
-  const EntriesEndpoint._(
+  EntriesEndpoint._(
       this.term,
       this.headers,
       String sourceLanguage,
@@ -37,18 +42,18 @@ class EntriesEndpoint extends Endpoint {
       this.grammaticalFeatures,
       this.lexicalCategory,
       this.domains)
-      : _sourceLanguage = sourceLanguage;
+      : _sourceLanguage = sourceLanguage.toLocale();
 
   @override
   final String term;
 
   @override
-  String get sourceLanguage =>
-      _sourceLanguage.toLowerCase().replaceAll(RegExp(r'[^a-z]'), '-');
-  final String _sourceLanguage;
+  Language get sourceLanguage => _sourceLanguage;
+  final Language _sourceLanguage;
 
   @override
-  String get path => 'api/v2/entries/$sourceLanguage/${term.toLowerCase()}';
+  String get path =>
+      'api/v2/entries/${sourceLanguage.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
 
   @override
   final Map<String, String> headers;

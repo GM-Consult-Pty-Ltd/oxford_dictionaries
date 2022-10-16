@@ -4,9 +4,10 @@
 
 import 'package:dictosaurus/dictosaurus.dart';
 import 'package:gmconsult_dart_core/dart_core.dart';
+import 'package:oxford_dictionaries/src/_index.dart';
 import 'package:porter_2_stemmer/porter_2_stemmer.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
-import '../_common/oxford_dictionaries_endpoint.dart';
+import '../oxford_dictionaries_endpoint.dart';
 
 /// An interface for Oxford Dictionaries API endpoints
 abstract class Endpoint extends ApiEndpointBase<TermProperties> {
@@ -25,7 +26,7 @@ abstract class Endpoint extends ApiEndpointBase<TermProperties> {
   HttpProtocol get protocol => HttpProtocol.https;
 
   /// The ISO language code for the language of a term.
-  String get sourceLanguage;
+  Language get sourceLanguage;
 
   /// The term parameter requested from the endpoint.
   String get term;
