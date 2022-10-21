@@ -19,11 +19,11 @@ enum OxFordDictionariesEndpoint {
   /// Search for headword matches, translations or synonyms for a word.
   search,
 
-  /// Search for headword matches, translations or synonyms for a word.
-  searchTranslations,
+  // /// Search for headword matches, translations or synonyms for a word.
+  // searchTranslations,
 
-  /// Search for headword matches, translations or synonyms for a word.
-  searchThesaurus,
+  // /// Search for headword matches, translations or synonyms for a word.
+  // searchThesaurus,
 
   /// Return translations for a given word.
   translations,
@@ -32,27 +32,28 @@ enum OxFordDictionariesEndpoint {
   /// (synonym/antonym).
   thesaurus,
 
-  /// Retrieve sentences extracted from a corpus of real-world language,
-  /// including news and blog content.
-  sentences,
+  // /// Retrieve sentences extracted from a corpus of real-world language,
+  // /// including news and blog content.
+  // sentences,
 
-  /// A collection of utility endpoints.
-  ///
-  /// See https://developer.oxforddictionaries.com/documentation#/ for
-  /// available paths.
-  utility,
+  // /// A collection of utility endpoints.
+  // ///
+  // /// See https://developer.oxforddictionaries.com/documentation#/ for
+  // /// available paths.
+  // utility,
 
   /// Retrieve definitions, examples and other information for a given
   /// dictionary word or an inflection.
   words,
 
-  /// Retrieve all the inflections of a given word.
-  inflections
+  // /// Retrieve all the inflections of a given word.
+  // inflections
 }
 
 ///
 extension OxfordLanguagesEndpointExtension on OxFordDictionariesEndpoint {
   ///
-  bool languageCodeExists(Language sourceLanguage) =>
-      Constants.sourceLanguages[this]?.contains(sourceLanguage) ?? false;
+  bool languageAvailable(Language language) =>
+      OxfordDictionariesLanguage.sourceLanguages[this]?.contains(language) ??
+      false;
 }

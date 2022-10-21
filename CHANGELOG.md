@@ -6,6 +6,18 @@ All rights reserved.
 
 *THIS PACKAGE IS **PRE-RELEASE**, IN ACTIVE DEVELOPMENT AND SUBJECT TO DAILY BREAKING CHANGES.*
 
+
+## 0.0.1-6
+**PRE-RELEASE**
+
+### *New*
+* `Entries` endpoint class.
+* `Lemmas` endpoint class.
+* `Search` endpoint class.
+* `Thesaurus` endpoint class.
+* `Translations` endpoint class.
+* `Words` endpoint class.
+
 ## 0.0.1-5
 **PRE-RELEASE**
 

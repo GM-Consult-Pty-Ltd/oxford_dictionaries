@@ -10,7 +10,7 @@ import 'package:gmconsult_dart_core/type_definitions.dart';
 import '../oxford_dictionaries_endpoint.dart';
 
 /// An interface for Oxford Dictionaries API endpoints
-abstract class Endpoint extends ApiEndpointBase<TermProperties> {
+abstract class Endpoint<T extends Object> extends ApiEndpointBase<T> {
   //
 
   /// Uses the [Porter2Stemmer] to return the stem of [term].
@@ -26,7 +26,7 @@ abstract class Endpoint extends ApiEndpointBase<TermProperties> {
   HttpProtocol get protocol => HttpProtocol.https;
 
   /// The ISO language code for the language of a term.
-  Language get sourceLanguage;
+  Language get language;
 
   /// The term parameter requested from the endpoint.
   String get term;
@@ -34,24 +34,23 @@ abstract class Endpoint extends ApiEndpointBase<TermProperties> {
   @override
   String get host => 'od-api.oxforddictionaries.com';
 
-  // /// Returns a [TermProperties] from [json] if it contains the required fields.
-  // TermProperties? fromJson(Map<String, dynamic> json);
+  // /// Returns a [T] from [json] if it contains the required fields.
+  // T? fromJson(Map<String, dynamic> json);
 
   @override
-  Future<TermProperties?> post(TermProperties? obj) =>
-      throw UnimplementedError();
+  Future<T?> post(T? obj) => throw UnimplementedError();
 
   @override
   Future<Map<String, dynamic>?> postJson(JSON? json) =>
       throw UnimplementedError();
 
   @override
-  JsonSerializer<TermProperties> get serializer => throw UnimplementedError();
+  JsonSerializer<T> get serializer => throw UnimplementedError();
 
   /// Returns the JSON for the endpoint
   @override
   Future<Map<String, dynamic>?> getJson() async {
-    if (endpoint.languageCodeExists(sourceLanguage) && term.isNotEmpty) {
+    if (endpoint.languageAvailable(language) && term.isNotEmpty) {
       final json = await super.getJson();
       if (json != null &&
           // json['query'].to == term.toLowerCase() &&
@@ -100,14 +99,24 @@ extension EndPointExtensionOnJson on JSON {
 
   /// Returns a [Pronunciation]s collection by parsing the 'pronunciations'
   /// field of the JSON.
-  Set<Pronunciation> pronunciations(String term) =>
-      getJsonList('pronunciations')
-          .map((pronunciation) => Pronunciation(
-              term: term,
-              audioLink: pronunciation['audioFile']?.toString(),
-              phoneticSpelling: pronunciation['phoneticSpelling']?.toString(),
-              languageCodes: pronunciation.getStringList('dialects')))
-          .toSet();
+  Set<Pronunciation> pronunciations(String term, Language language) {
+    final json = getJsonList('pronunciations');
+    final retVal = <Pronunciation>{};
+    for (final pronunciation in json) {
+      final audioLink = pronunciation['audioFile']?.toString();
+      final phoneticSpelling = pronunciation['phoneticSpelling'].toString();
+      final dialects = pronunciation.getStringList('dialects');
+      dialects.add(language.name);
+      for (final dialect in dialects) {
+        retVal.add(Pronunciation(
+            term: term,
+            dialect: dialect,
+            phoneticSpelling: phoneticSpelling,
+            audioLink: audioLink));
+      }
+    }
+    return retVal;
+  }
 
   /// Returns a collection of etymologies by parsing the 'etymologies'
   /// field of the JSON.

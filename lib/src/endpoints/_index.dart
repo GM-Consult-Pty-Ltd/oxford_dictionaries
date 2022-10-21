@@ -4,5 +4,7 @@
 
 export 'entries_endpoint.dart';
 export 'lemmas_endpoint.dart';
+export 'search_endpoint.dart';
 export 'words_endpoint.dart';
-export 'words_endpoint.dart';
+export 'thesaurus_endpoint.dart';
+export 'translations_endpoint.dart';

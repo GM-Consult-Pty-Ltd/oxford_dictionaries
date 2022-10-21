@@ -2,58 +2,67 @@
 // BSD 3-Clause License
 // All rights reserved
 
-import 'package:gmconsult_dart_core/dart_core.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'package:gmconsult_dart_core/extensions.dart';
 import 'endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
 /// Retrieve definitions, pronunciations  example sentences, grammatical
 /// information and word origins.
 ///
-/// ONLY works for dictionary headwords. You may need to use the Lemmas endpoint first to link an inflected form back to its headword (e.g., pixels --> pixel). Use filters to limit the entry information that is returned. For example, you may only require definitions and not everything else, or just pronunciations. The full list of filters can be retrieved from the filters Utility endpoint. You can also specify values within the filter using '='. For example 'grammaticalFeatures=singular'. Filters can also be combined.
-/// Combining different filters will build a query using 'AND' operators, while if a filter contains more than one value it will build a query using 'OR' operators. For example, a combination of filters like '?grammaticalFeatures=singular&lexicalCategory=noun,verb' will return entries which match the query ('noun' OR 'verb') AND 'singular'.
-class EntriesEndpoint extends Endpoint {
+/// ONLY works for dictionary headwords. You may need to use the Lemmas
+/// endpoint first to link an inflected form back to its headword (e.g., pixels
+/// --> pixel). Use filters to limit the entry information that is returned.
+/// For example, you may only require definitions and not everything else, or
+/// just pronunciations. The full list of filters can be retrieved from the
+/// filters Utility endpoint. You can also specify values within the filter
+/// using '='. For example 'grammaticalFeatures=singular'. Filters can also
+/// be combined.
+///
+/// Combining different filters will build a query using 'AND' operators,
+/// while if a filter contains more than one value it will build a query
+/// using 'OR' operators. For example, a combination of filters like
+/// ?grammaticalFeatures=singular&lexicalCategory=noun,verb' will
+/// eturn entries which match the query ('noun' OR 'verb') AND 'singular'.
+class Entries extends Endpoint<DictionaryEntry> {
 //
 
-  /// Queries the [EntriesEndpoint] for a [TermProperties] for the [term] and
+  /// Queries the [Entries] for a [DictionaryEntry] for the [term] and
   /// optional parameters.
-  static Future<TermProperties?> query(String term, Map<String, String> apiKeys,
-          {String sourceLanguage = 'en-us',
+  static Future<DictionaryEntry?> query(
+          String term, Map<String, String> apiKeys,
+          {Language language = Language.en_US,
           bool strictMatch = false,
           Iterable<String>? fields,
           Iterable<String>? registers,
           Iterable<String>? grammaticalFeatures,
           PartOfSpeech? lexicalCategory,
           Iterable<String>? domains}) =>
-      EntriesEndpoint._(term, apiKeys, sourceLanguage, strictMatch, fields,
-              registers, grammaticalFeatures, lexicalCategory, domains)
+      Entries._(term, apiKeys, language, strictMatch, fields, registers,
+              grammaticalFeatures, lexicalCategory, domains)
           .get();
 
   /// Const default generative constructor.
-  EntriesEndpoint._(
+  Entries._(
       this.term,
       this.headers,
-      String sourceLanguage,
+      this.language,
       this.strictMatch,
       this.fields,
       this.registers,
       this.grammaticalFeatures,
       this.lexicalCategory,
-      this.domains)
-      : _sourceLanguage = sourceLanguage.toLocale();
+      this.domains);
 
   @override
   final String term;
 
   @override
-  Language get sourceLanguage => _sourceLanguage;
-  final Language _sourceLanguage;
+  final Language language;
 
   @override
   String get path =>
-      'api/v2/entries/${sourceLanguage.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
+      'api/v2/entries/${language.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
 
   @override
   final Map<String, String> headers;
@@ -150,24 +159,19 @@ class EntriesEndpoint extends Endpoint {
   OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
 
   @override
-  JsonDeserializer<TermProperties> get deserializer =>
-      (json) => json.toTermProperties();
+  JsonDeserializer<DictionaryEntry> get deserializer =>
+      (json) => json.toDictionaryEntry(language);
 }
 
 extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
   //
 
-  TermProperties toTermProperties() {
+  DictionaryEntry toDictionaryEntry(Language language) {
     final term = this.term;
-    String sourceLanguage = '';
     final Iterable<Map<String, dynamic>> results = getJsonList('results');
     if (results.isNotEmpty && term is String) {
-      sourceLanguage = sourceLanguage.isEmpty
-          ? results.first.language ?? ''
-          : sourceLanguage;
       final stem = this['porter2stem'] as String;
       final variants = <TermVariant>{};
-
       for (final r in results) {
         final lexicalEntries = r.getJsonList('lexicalEntries');
         for (final le in lexicalEntries) {
@@ -179,7 +183,7 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
               final inflections =
                   e.getTextValues('inflections', 'inflectedForm');
               final etymologies = e.etymologies;
-              final pronunciations = e.pronunciations(term);
+              final pronunciations = e.pronunciations(term, language);
               final senses = e.getJsonList('senses');
               for (final s in senses) {
                 final synonyms = s.getTextValues('synonyms', 'text');
@@ -188,6 +192,7 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
                   phrases.addAll(s.getTextValues('examples', 'text'));
                   final variant = TermVariant(
                       term: term,
+                      language: language,
                       pronunciations: pronunciations,
                       etymologies: etymologies,
                       lemmas: {},
@@ -207,6 +212,7 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
                     synonyms.addAll(ss.getTextValues('synonyms', 'text'));
                     final variant = TermVariant(
                         term: term,
+                        language: language,
                         pronunciations: pronunciations,
                         etymologies: etymologies,
                         lemmas: {},
@@ -224,13 +230,10 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
           }
         }
       }
-      return TermProperties(
-          term: term,
-          stem: stem,
-          languageCode: sourceLanguage,
-          variants: variants);
+      return DictionaryEntry(
+          term: term, stem: stem, language: language, variants: variants);
     }
-    throw ('The json object does not represent a TermProperties object.');
+    throw ('The json object does not represent a DictionaryEntry object.');
   }
 
   /// Returns the `id` field of the Map<String, dynamic> response as `String?`.

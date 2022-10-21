@@ -2,10 +2,8 @@
 // BSD 3-Clause License
 // All rights reserved
 
-import 'package:gmconsult_dart_core/dart_core.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'package:gmconsult_dart_core/extensions.dart';
 import 'endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
@@ -23,35 +21,32 @@ import 'package:dictosaurus/dictosaurus.dart';
 /// using 'OR' operators. For example, a combination of filters like
 /// '?grammaticalFeatures=singular&lexicalCategory=noun,verb' will return
 /// entries which match the query ('noun' OR 'verb') AND 'singular'.
-class LemmasEndpoint extends Endpoint {
+class Lemmas extends Endpoint<DictionaryEntry> {
 //
 
-  /// Queries the [LemmasEndpoint] for a [TermProperties] for the [term] and
+  /// Queries the [Lemmas] for a [DictionaryEntry] for the [term] and
   /// optional parameters.
-  static Future<TermProperties?> query(String term, Map<String, String> apiKeys,
-          {String sourceLanguage = 'en-us',
+  static Future<DictionaryEntry?> query(
+          String term, Map<String, String> apiKeys,
+          {Language language = Language.en_US,
           Iterable<String>? grammaticalFeatures,
           PartOfSpeech? lexicalCategory}) =>
-      LemmasEndpoint._(term, apiKeys, sourceLanguage, grammaticalFeatures,
-              lexicalCategory)
+      Lemmas._(term, apiKeys, language, grammaticalFeatures, lexicalCategory)
           .get();
 
   /// Const default generative constructor.
-  LemmasEndpoint._(this.term, this.headers, String sourceLanguage,
-      this.grammaticalFeatures, this.lexicalCategory)
-      : _sourceLanguage = sourceLanguage.toLocale();
+  Lemmas._(this.term, this.headers, this.language, this.grammaticalFeatures,
+      this.lexicalCategory);
 
   @override
   final String term;
 
   @override
-  Language get sourceLanguage => _sourceLanguage;
-
-  final Language _sourceLanguage;
+  final Language language;
 
   @override
   String get path =>
-      'api/v2/lemmas/${sourceLanguage.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
+      'api/v2/lemmas/${language.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
 
   @override
   final Map<String, String> headers;
@@ -96,21 +91,18 @@ class LemmasEndpoint extends Endpoint {
   OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
 
   @override
-  JsonDeserializer<TermProperties> get deserializer =>
-      (json) => json.toTermProperties();
+  JsonDeserializer<DictionaryEntry> get deserializer =>
+      (json) => json.toDictionaryEntry(language);
 }
 
 extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
   //
 
-  TermProperties toTermProperties() {
+  DictionaryEntry toDictionaryEntry(Language language) {
     String? term;
-    String sourceLanguage = '';
+
     final Iterable<Map<String, dynamic>> results = getJsonList('results');
     if (results.isNotEmpty) {
-      sourceLanguage = sourceLanguage.isEmpty
-          ? results.first.language ?? ''
-          : sourceLanguage;
       final stem = this['porter2stem'] as String;
       final variants = <TermVariant>{};
       for (final r in results) {
@@ -122,6 +114,7 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
             final lemmas = le.getTextValues('inflectionOf', 'text');
             final variant = TermVariant(
                 term: term ?? '',
+                language: language,
                 pronunciations: {},
                 etymologies: {},
                 lemmas: lemmas,
@@ -136,14 +129,11 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
         }
       }
       if (term is String && term.isNotEmpty) {
-        return TermProperties(
-            term: term,
-            stem: stem,
-            languageCode: sourceLanguage,
-            variants: variants);
+        return DictionaryEntry(
+            term: term, stem: stem, language: language, variants: variants);
       }
     }
-    throw ('The json object does not represent a TermProperties object.');
+    throw ('The json object does not represent a DictionaryEntry object.');
   }
 
   /// Returns the `id` field of the Map<String, dynamic> response as `String?`.

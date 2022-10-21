@@ -2,47 +2,42 @@
 // BSD 3-Clause License
 // All rights reserved
 
-import 'package:gmconsult_dart_core/dart_core.dart';
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'package:gmconsult_dart_core/extensions.dart';
 import 'endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
-/// retrieve words that are similar/opposite in meaning to the input word
+/// Retrieve words that are similar/opposite in meaning to the input word
 /// (synonym /antonym).
-class ThesaurusEndpoint extends Endpoint {
+class Thesaurus extends Endpoint<DictionaryEntry> {
 //
 
-  /// Queries the [ThesaurusEndpoint] for a [TermProperties] for the [term] and
+  /// Queries the [Thesaurus] for a [DictionaryEntry] for the [term] and
   /// optional parameters.
-  static Future<TermProperties?> query(String term, Map<String, String> apiKeys,
-          {String sourceLanguage = 'en-us',
+  static Future<DictionaryEntry?> query(
+          String term, Map<String, String> apiKeys,
+          {Language language = Language.en_US,
           bool strictMatch = false,
           Iterable<String>? fields,
           Iterable<String>? registers,
           Iterable<String>? grammaticalFeatures,
           PartOfSpeech? lexicalCategory,
           Iterable<String>? domains}) =>
-      ThesaurusEndpoint._(term, apiKeys, sourceLanguage, strictMatch, fields)
-          .get();
+      Thesaurus._(term, apiKeys, language, strictMatch, fields).get();
 
   /// Const default generative constructor.
-  ThesaurusEndpoint._(this.term, this.headers, String sourceLanguage,
-      this.strictMatch, this.fields)
-      : _sourceLanguage = sourceLanguage.toLocale();
+  Thesaurus._(
+      this.term, this.headers, this.language, this.strictMatch, this.fields);
 
   @override
   final String term;
 
   @override
-  Language get sourceLanguage => _sourceLanguage;
-
-  final Language _sourceLanguage;
+  final Language language;
 
   @override
   String get path =>
-      'api/v2/thesaurus/${sourceLanguage.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
+      'api/v2/thesaurus/${language.toLanguageTag().toLowerCase()}/${term.toLowerCase()}';
 
   @override
   final Map<String, String> headers;
@@ -81,21 +76,18 @@ class ThesaurusEndpoint extends Endpoint {
   OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
 
   @override
-  JsonDeserializer<TermProperties> get deserializer =>
-      (json) => json.toTermProperties();
+  JsonDeserializer<DictionaryEntry> get deserializer =>
+      (json) => json.toDictionaryEntry(language);
 }
 
 extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
   //
 
-  TermProperties toTermProperties() {
+  DictionaryEntry toDictionaryEntry(Language language) {
     final term = this.term;
-    String sourceLanguage = '';
+
     final Iterable<Map<String, dynamic>> results = getJsonList('results');
     if (results.isNotEmpty && term is String) {
-      sourceLanguage = sourceLanguage.isEmpty
-          ? results.first.language ?? ''
-          : sourceLanguage;
       final stem = this['porter2stem'] as String;
       final variants = <TermVariant>{};
       for (final r in results) {
@@ -108,7 +100,7 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
             for (final e in entries) {
               final inflections =
                   e.getTextValues('inflections', 'inflectedForm');
-              final pronunciations = e.pronunciations(term);
+              final pronunciations = e.pronunciations(term, language);
               final etymologies = e.etymologies;
               // phonetic = phonetic ?? e.lexicalEntriesEntryPhonetic;
               final senses = e.getJsonList('senses');
@@ -125,6 +117,7 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
 
                 final variant = TermVariant(
                     term: term,
+                    language: language,
                     pronunciations: pronunciations,
                     etymologies: etymologies,
                     lemmas: {},
@@ -140,13 +133,10 @@ extension _OxfordDictionariesHashmapExtension on Map<String, dynamic> {
           }
         }
       }
-      return TermProperties(
-          term: term,
-          stem: stem,
-          languageCode: sourceLanguage,
-          variants: variants);
+      return DictionaryEntry(
+          term: term, stem: stem, language: language, variants: variants);
     }
-    throw ('The json object does not represent a TermProperties object.');
+    throw ('The json object does not represent a DictionaryEntry object.');
   }
 
   /// Returns the `id` field of the Map<String, dynamic> response as `String?`.
