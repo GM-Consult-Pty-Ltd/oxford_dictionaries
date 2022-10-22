@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the Search class from the endpoints library, for the Dart programming language.">
+  <title>Search class - endpoints library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">oxford_dictionaries</a></li>
+    <li><a href="../endpoints/endpoints-library.html">endpoints</a></li>
+    <li class="self-crumb">Search class</li>
+  </ol>
+  <div class="self-name">Search</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">Search</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Retrieve possible headword matches for a given string of text.</p>
+<p>The results are calculated using headword matching, fuzzy matching, and
+lemmatization</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/ApiEndpointBase-class.html">ApiEndpointBase</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></li>
+      <li>Search</li>
+    </ul>
+  </dd>
+
+        
+        
+
+
+
+        
+      </dl>
+    </section>
+
+    
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="deserializer" class="property">
+  <span class="name"><a href="../endpoints/Search/deserializer.html">deserializer</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/type_definitions/JsonDeserializer.html">JsonDeserializer</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Deserializes <a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/type_definitions/JSON.html">JSON</a> to an object of type <code>T</code>.
+  <div class="features">read-only, override</div>
+
+</dd>
+
+        <dt id="endpoint" class="property">
+  <span class="name"><a href="../endpoints/Search/endpoint.html">endpoint</a></span>
+  <span class="signature">&#8594; <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></span> 
+
+</dt>
+<dd>
+  The <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a> enumeration of the Endpoint.
+  <div class="features">read-only</div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="headers" class="property">
+  <span class="name"><a href="../endpoints/Search/headers.html">headers</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Returns the headers for the API endpoint request.
+  <div class="features">final</div>
+
+</dd>
+
+        <dt id="host" class="property inherited">
+  <span class="name"><a href="../endpoints/Search/host.html">host</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd class="inherited">
+  The host part of the API endpoint request.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="language" class="property">
+  <span class="name"><a href="../endpoints/Search/language.html">language</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/Language-class.html">Language</a></span> 
+
+</dt>
+<dd>
+  The ISO language code for the language of a term.
+  <div class="features">final</div>
+
+</dd>
+
+        <dt id="limit" class="property">
+  <span class="name"><a href="../endpoints/Search/limit.html">limit</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> 
+
+</dt>
+<dd>
+  Restricts number of returned results. Default and maximum is 5000.
+  <div class="features">final</div>
+
+</dd>
+
+        <dt id="name" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/ApiEndpointMixin/name.html">name</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd class="inherited">
+  Returns the name of the endpoint
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="offset" class="property">
+  <span class="name"><a href="../endpoints/Search/offset.html">offset</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> 
+
+</dt>
+<dd>
+  Pagination - results offset. The sum of offset and limit must not
+exceed 10000.
+  <div class="features">final</div>
+
+</dd>
+
+        <dt id="path" class="property">
+  <span class="name"><a href="../endpoints/Search/path.html">path</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+  The path element for the API endpoint uri.
+  <div class="features">read-only, override</div>
+
+</dd>
+
+        <dt id="porter2stem" class="property inherited">
+  <span class="name"><a href="../endpoints/Search/porter2stem.html">porter2stem</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd class="inherited">
+  Uses the <a href="https://pub.dev/documentation/porter_2_stemmer/3.0.1/porter_2_stemmer/Porter2Stemmer-class.html">Porter2Stemmer</a> to return the stem of <a href="../endpoints/Search/term.html">term</a>.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="prefix" class="property">
+  <span class="name"><a href="../endpoints/Search/prefix.html">prefix</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd>
+  Specifies whether to return only results that start with the term.
+  <div class="features">final</div>
+
+</dd>
+
+        <dt id="protocol" class="property inherited">
+  <span class="name"><a href="../endpoints/Search/protocol.html">protocol</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/HttpProtocol.html">HttpProtocol</a></span> 
+
+</dt>
+<dd class="inherited">
+  The protocol of the API endpoint.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="queryParameters" class="property">
+  <span class="name"><a href="../endpoints/Search/queryParameters.html">queryParameters</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  The query parameters for the endpoint.
+  <div class="features">read-only, override</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="serializer" class="property inherited">
+  <span class="name"><a href="../endpoints/Search/serializer.html">serializer</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/type_definitions/JsonSerializer.html">JsonSerializer</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> 
+
+</dt>
+<dd class="inherited">
+  Serializes an object of type <code>T</code> to <a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/type_definitions/JSON.html">JSON</a>.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="term" class="property">
+  <span class="name"><a href="../endpoints/Search/term.html">term</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+  The term parameter requested from the endpoint.
+  <div class="features">final</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="get" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/ApiEndpointMixin/get.html">get</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Asynchronously returns an object of type <code>T</code> from the API endpoint.
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getJson" class="callable inherited">
+  <span class="name"><a href="../endpoints/Search/getJson.html">getJson</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the JSON for the endpoint
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed.
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="post" class="callable inherited">
+  <span class="name"><a href="../endpoints/Search/post.html">post</a></span><span class="signature">(<wbr><span class="parameter" id="post-param-obj"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">obj</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Asynchronously posts an <code>obj</code> of type <code>T</code> to the API endpoint using POST.
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="postJson" class="callable inherited">
+  <span class="name"><a href="../endpoints/Search/postJson.html">postJson</a></span><span class="signature">(<wbr><span class="parameter" id="postJson-param-json"><span class="type-annotation"><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/type_definitions/JSON.html">JSON</a>?</span> <span class="parameter-name">json</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Asynchronously posts a <code>json</code> document to the API endpoint using POST.
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features">inherited</div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features">inherited</div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+  <section class="summary offset-anchor" id="static-methods">
+    <h2>Static Methods</h2>
+    <dl class="callables">
+        <dt id="query" class="callable">
+  <span class="name"><a href="../endpoints/Search/query.html">query</a></span><span class="signature">(<wbr><span class="parameter" id="query-param-term"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">term</span>, </span><span class="parameter" id="query-param-apiKeys"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">apiKeys</span>, </span><span class="parameter" id="query-param-language">{<span class="type-annotation"><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/Language-class.html">Language</a></span> <span class="parameter-name">language</span> = <span class="default-value">Language.en_US</span>, </span><span class="parameter" id="query-param-prefix"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">prefix</span> = <span class="default-value">false</span>, </span><span class="parameter" id="query-param-limit"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">limit</span>, </span><span class="parameter" id="query-param-offset"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">offset</span>, </span><span class="parameter" id="query-param-grammaticalFeatures"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">grammaticalFeatures</span>, </span><span class="parameter" id="query-param-lexicalCategory"><span class="type-annotation"><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/PartOfSpeech.html">PartOfSpeech</a>?</span> <span class="parameter-name">lexicalCategory</span>, </span><span class="parameter" id="query-param-domains"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Iterable-class.html">Iterable</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">domains</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Queries the <a href="../endpoints/Search-class.html">Search</a> for a <code>List&lt;String&gt;</code> for the <code>term</code> and
+optional parameters.
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">oxford_dictionaries</a></li>
+  <li><a href="../endpoints/endpoints-library.html">endpoints</a></li>
+  <li class="self-crumb">Search class</li>
+</ol>
+
+
+    <h5>endpoints library</h5>
+    <ol>
+  <li class="section-title"><a href="../endpoints/endpoints-library.html#classes">Classes</a></li>
+  <li><a href="../endpoints/Entries-class.html">Entries</a></li>
+  <li><a href="../endpoints/Lemmas-class.html">Lemmas</a></li>
+  <li><a href="../endpoints/Search-class.html">Search</a></li>
+  <li><a href="../endpoints/Thesaurus-class.html">Thesaurus</a></li>
+  <li><a href="../endpoints/Translations-class.html">Translations</a></li>
+  <li><a href="../endpoints/Words-class.html">Words</a></li>
+
+
+
+
+
+
+
+
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+
+
+    <li class="section-title">
+      <a href="../endpoints/Search-class.html#instance-properties">Properties</a>
+    </li>
+    <li><a href="../endpoints/Search/deserializer.html">deserializer</a></li>
+    <li><a href="../endpoints/Search/endpoint.html">endpoint</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li><a href="../endpoints/Search/headers.html">headers</a></li>
+    <li class="inherited"><a href="../endpoints/Search/host.html">host</a></li>
+    <li><a href="../endpoints/Search/language.html">language</a></li>
+    <li><a href="../endpoints/Search/limit.html">limit</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/ApiEndpointMixin/name.html">name</a></li>
+    <li><a href="../endpoints/Search/offset.html">offset</a></li>
+    <li><a href="../endpoints/Search/path.html">path</a></li>
+    <li class="inherited"><a href="../endpoints/Search/porter2stem.html">porter2stem</a></li>
+    <li><a href="../endpoints/Search/prefix.html">prefix</a></li>
+    <li class="inherited"><a href="../endpoints/Search/protocol.html">protocol</a></li>
+    <li><a href="../endpoints/Search/queryParameters.html">queryParameters</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="../endpoints/Search/serializer.html">serializer</a></li>
+    <li><a href="../endpoints/Search/term.html">term</a></li>
+
+    <li class="section-title inherited"><a href="../endpoints/Search-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/ApiEndpointMixin/get.html">get</a></li>
+    <li class="inherited"><a href="../endpoints/Search/getJson.html">getJson</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="../endpoints/Search/post.html">post</a></li>
+    <li class="inherited"><a href="../endpoints/Search/postJson.html">postJson</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../endpoints/Search-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+        <li class="section-title"><a href="../endpoints/Search-class.html#static-methods">Static methods</a></li>
+          <li><a href="../endpoints/Search/query.html">query</a></li>
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    oxford_dictionaries
+      0.0.1-7
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+

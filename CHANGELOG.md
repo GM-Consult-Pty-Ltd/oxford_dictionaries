@@ -6,6 +6,10 @@ All rights reserved.
 
 *THIS PACKAGE IS **PRE-RELEASE**, IN ACTIVE DEVELOPMENT AND SUBJECT TO DAILY BREAKING CHANGES.*
 
+## 0.0.1-6
+**PRE-RELEASE**
+
+* Bumped `dictosaurus` to `0.0.20`.
 
 ## 0.0.1-6
 **PRE-RELEASE**

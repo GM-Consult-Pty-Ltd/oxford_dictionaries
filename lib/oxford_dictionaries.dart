@@ -12,6 +12,5 @@ library oxford_dictionaries;
 export 'src/_index.dart'
     show
         OxfordDictionaries,
-        OxfordDictionariesApiMixin,
         OxFordDictionariesEndpoint;
 export 'package:dictosaurus/dictosaurus.dart';

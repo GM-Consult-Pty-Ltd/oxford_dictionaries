@@ -144,36 +144,6 @@ information and word origins.</p>
   </div>
 </dd>
 
-          <dt id="searchTranslations" class="constant">
-    <span class="name ">searchTranslations</span>
-  <span class="signature">&#8594; const <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></span>
-  
-
-</dt>
-<dd>
-  <p>Search for headword matches, translations or synonyms for a word.</p>
-  
-
-  <div>
-    <span class="signature"><code>OxFordDictionariesEndpoint()</code></span>
-  </div>
-</dd>
-
-          <dt id="searchThesaurus" class="constant">
-    <span class="name ">searchThesaurus</span>
-  <span class="signature">&#8594; const <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></span>
-  
-
-</dt>
-<dd>
-  <p>Search for headword matches, translations or synonyms for a word.</p>
-  
-
-  <div>
-    <span class="signature"><code>OxFordDictionariesEndpoint()</code></span>
-  </div>
-</dd>
-
           <dt id="translations" class="constant">
     <span class="name ">translations</span>
   <span class="signature">&#8594; const <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></span>
@@ -205,39 +175,6 @@ information and word origins.</p>
   </div>
 </dd>
 
-          <dt id="sentences" class="constant">
-    <span class="name ">sentences</span>
-  <span class="signature">&#8594; const <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></span>
-  
-
-</dt>
-<dd>
-  <p>Retrieve sentences extracted from a corpus of real-world language,
-including news and blog content.</p>
-  
-
-  <div>
-    <span class="signature"><code>OxFordDictionariesEndpoint()</code></span>
-  </div>
-</dd>
-
-          <dt id="utility" class="constant">
-    <span class="name ">utility</span>
-  <span class="signature">&#8594; const <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></span>
-  
-
-</dt>
-<dd>
-  <p>A collection of utility endpoints.</p>
-<p>See <a href="https://developer.oxforddictionaries.com/documentation#/">https://developer.oxforddictionaries.com/documentation#/</a> for
-available paths.</p>
-  
-
-  <div>
-    <span class="signature"><code>OxFordDictionariesEndpoint()</code></span>
-  </div>
-</dd>
-
           <dt id="words" class="constant">
     <span class="name ">words</span>
   <span class="signature">&#8594; const <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></span>
@@ -247,21 +184,6 @@ available paths.</p>
 <dd>
   <p>Retrieve definitions, examples and other information for a given
 dictionary word or an inflection.</p>
-  
-
-  <div>
-    <span class="signature"><code>OxFordDictionariesEndpoint()</code></span>
-  </div>
-</dd>
-
-          <dt id="inflections" class="constant">
-    <span class="name ">inflections</span>
-  <span class="signature">&#8594; const <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></span>
-  
-
-</dt>
-<dd>
-  <p>Retrieve all the inflections of a given word.</p>
   
 
   <div>
@@ -390,7 +312,7 @@ dictionary word or an inflection.</p>
   
 
   <div>
-    <span class="signature"><code>[entries, lemmas, search, searchTranslations, searchThesaurus, translations, thesaurus, sentences, utility, words, inflections]</code></span>
+    <span class="signature"><code>[entries, lemmas, search, translations, thesaurus, words]</code></span>
   </div>
 </dd>
 
@@ -415,29 +337,38 @@ dictionary word or an inflection.</p>
     <h5>oxford_dictionaries library</h5>
     <ol>
   <li class="section-title"><a href="../oxford_dictionaries/oxford_dictionaries-library.html#classes">Classes</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/AutoCorrect-class.html">AutoCorrect</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/AutoCorrectBase-class.html">AutoCorrectBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/AutoCorrectMixin-class.html">AutoCorrectMixin</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/Dictionary-class.html">Dictionary</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/DictionaryBase-class.html">DictionaryBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/DictionaryMixin-class.html">DictionaryMixin</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/DictoSaurus-class.html">DictoSaurus</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/DictoSaurusBase-class.html">DictoSaurusBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/DictoSaurusMixin-class.html">DictoSaurusMixin</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/AutoCorrect-class.html">AutoCorrect</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/AutoCorrectBase-class.html">AutoCorrectBase</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/AutoCorrectMixin-class.html">AutoCorrectMixin</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/Dictionary-class.html">Dictionary</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/DictionaryEntryBase-class.html">DictionaryEntryBase</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/DictionaryEntryMixin-class.html">DictionaryEntryMixin</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/DictoSaurus-class.html">DictoSaurus</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/DictoSaurusBase-class.html">DictoSaurusBase</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/DictoSaurusMixin-class.html">DictoSaurusMixin</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/English-class.html">English</a></li>
+  <li><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/Language-class.html">Language</a></li>
   <li><a href="../oxford_dictionaries/OxfordDictionaries-class.html">OxfordDictionaries</a></li>
-  <li><a href="../oxford_dictionaries/OxfordDictionariesApiMixin-class.html">OxfordDictionariesApiMixin</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/Pronunciation-class.html">Pronunciation</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/PronunciationBase-class.html">PronunciationBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/PronunciationMixin-class.html">PronunciationMixin</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/TermProperties-class.html">TermProperties</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/TermPropertiesBase-class.html">TermPropertiesBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/TermPropertiesMixin-class.html">TermPropertiesMixin</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/TermVariant-class.html">TermVariant</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/TermVariantBase-class.html">TermVariantBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/TermVariantMixin-class.html">TermVariantMixin</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/Thesaurus-class.html">Thesaurus</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/ThesaurusBase-class.html">ThesaurusBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/ThesaurusMixin-class.html">ThesaurusMixin</a></li>
+  <li><a href="https://pub.dev/documentation/porter_2_stemmer/3.0.1/porter_2_stemmer/Porter2Stemmer-class.html">Porter2Stemmer</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/Pronunciation-class.html">Pronunciation</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/PronunciationBase-class.html">PronunciationBase</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/PronunciationMixin-class.html">PronunciationMixin</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/SimilarityIndex-class.html">SimilarityIndex</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarity-class.html">TermSimilarity</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityBase-class.html">TermSimilarityBase</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityMixin-class.html">TermSimilarityMixin</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/TermVariant-class.html">TermVariant</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/TermVariantBase-class.html">TermVariantBase</a></li>
+  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20/dictosaurus/TermVariantMixin-class.html">TermVariantMixin</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextAnalyzer-class.html">TextAnalyzer</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument-class.html">TextDocument</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocumentBase-class.html">TextDocumentBase</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocumentMixin-class.html">TextDocumentMixin</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizer-class.html">TextTokenizer</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizerBase-class.html">TextTokenizerBase</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizerMixin-class.html">TextTokenizerMixin</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/Token-class.html">Token</a></li>
 
 
 
@@ -446,8 +377,8 @@ dictionary word or an inflection.</p>
 
   <li class="section-title"><a href="../oxford_dictionaries/oxford_dictionaries-library.html#enums">Enums</a></li>
   <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html">OxFordDictionariesEndpoint</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/PartOfSpeech.html">PartOfSpeech</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.9/dictosaurus/TermProperty.html">TermProperty</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/PartOfSpeech.html">PartOfSpeech</a></li>
+  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/PoSTag.html">PoSTag</a></li>
 
 
 </ol>
@@ -464,14 +395,9 @@ dictionary word or an inflection.</p>
     <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#entries">entries</a></li>
     <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#lemmas">lemmas</a></li>
     <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#search">search</a></li>
-    <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#searchTranslations">searchTranslations</a></li>
-    <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#searchThesaurus">searchThesaurus</a></li>
     <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#translations">translations</a></li>
     <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#thesaurus">thesaurus</a></li>
-    <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#sentences">sentences</a></li>
-    <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#utility">utility</a></li>
     <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#words">words</a></li>
-    <li><a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#inflections">inflections</a></li>
 
     <li class="section-title inherited">
       <a href="../oxford_dictionaries/OxFordDictionariesEndpoint.html#instance-properties">Properties</a>
@@ -501,7 +427,7 @@ dictionary word or an inflection.</p>
 <footer>
   <span class="no-break">
     oxford_dictionaries
-      0.0.1-5
+      0.0.1-7
   </span>
 
   
