@@ -38,7 +38,7 @@ void main() {
 
       final translations =
           await OxfordDictionaries(appId: appId, appKey: appKey)
-              .translate(term, Language.de);
+              .translate(term, OxfordDictionariesLanguage.de);
       print(translations.map((e) => e.term));
     });
 

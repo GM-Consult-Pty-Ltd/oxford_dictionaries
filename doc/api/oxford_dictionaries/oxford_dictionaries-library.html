@@ -51,7 +51,25 @@
     
 <section class="desc markdown">
   <p>Dictionary class that uses the Oxford Dictionaries REST API.</p>
-<p>Also exports the <code>dictosaurus</code> package.</p>
+<p><em>Oxford Dictionaries, the Oxford Dictionaries logo, Oxford University Press,
+OUP, Oxford and/or any other names of products or services provided by
+Oxford University Press and referred to in this package are either
+trademarks or registered trademarks of Oxford University Press.</em></p>
+<p>The <code>oxford_dictionaries</code> library uses endpoints of the
+<a href="https://developer.oxforddictionaries.com/">Oxford Dictionaries API</a> to
+return lexical data. To use this library you need to
+<a href="https://developer.oxforddictionaries.com/#plans">sign up for an account</a>
+to obtain API keys.</p>
+<p>The <a href="../oxford_dictionaries/OxfordDictionaries-class.html">OxfordDictionaries</a> class implements the <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurus-class.html">DictoSaurus</a> interface that includes includes <em>dictionary</em>, <em>thesaurus</em> and <em>term expansion</em> utilities.</p>
+<p>The implementation in this library uses six (out of nine)
+<a href="https://developer.oxforddictionaries.com/documentation">Oxford Dictionaries API endpoints</a>
+to populate a <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> object and provide some
+<a href="https://developer.oxforddictionaries.com/documentation/languages">translation services to/from English</a>.</p>
+<p>The endpoint classes are available in a separate <code>endpoints</code> mini-library.
+More information on the endpoints are available from the
+<a href="https://developer.oxforddictionaries.com/documentation">Oxford Dictionaries API Documentation</a>.</p>
+<p>This library Also exports the <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurus-class.html">DictoSaurus</a> interface, and <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/PartOfSpeech.html">PartOfSpeech</a>
+enumeration from the <code>dictosaurus</code> package.</p>
 </section>
 
 
@@ -59,65 +77,12 @@
       <h2>Classes</h2>
 
       <dl>
-        <dt id="AutoCorrect">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect-class.html">AutoCorrect</a></span> 
-
-</dt>
-<dd>
-  The <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect-class.html">AutoCorrect</a> interface exposes the <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect/suggestionsFor.html">suggestionsFor</a> and <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect/startsWith.html">startsWith</a>
-methods.
-</dd>
-
-        <dt id="AutoCorrectBase">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrectBase-class.html">AutoCorrectBase</a></span> 
-
-</dt>
-<dd>
-  An abstract class that implements the <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect-class.html">AutoCorrect</a> interface.
-</dd>
-
-        <dt id="AutoCorrectMixin">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrectMixin-class.html">AutoCorrectMixin</a></span> 
-
-</dt>
-<dd>
-  A mixin class that implements the <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect/suggestionsFor.html">AutoCorrect.suggestionsFor</a> and
-<a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect/startsWith.html">AutoCorrect.startsWith</a> methods.
-</dd>
-
-        <dt id="Dictionary">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/Dictionary-class.html">Dictionary</a></span> 
-
-</dt>
-<dd>
-  The <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/Dictionary-class.html">Dictionary</a> is an API for return the language properties of a term
-or a translation of a term.
-</dd>
-
         <dt id="DictionaryEntry">
   <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a></span> 
 
 </dt>
 <dd>
   An <code>object model</code> for a <code>term</code> or <code>word</code> with immutable properties.
-</dd>
-
-        <dt id="DictionaryEntryBase">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntryBase-class.html">DictionaryEntryBase</a></span> 
-
-</dt>
-<dd>
-  An abstract <code>base class</code> with <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntryMixin-class.html">DictionaryEntryMixin</a> that implements the
-<a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> interface.
-</dd>
-
-        <dt id="DictionaryEntryMixin">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntryMixin-class.html">DictionaryEntryMixin</a></span> 
-
-</dt>
-<dd>
-  Abstract mixin class that implements the <code>==</code> operator and methods of the
-<a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> interface.
 </dd>
 
         <dt id="DictoSaurus">
@@ -127,41 +92,6 @@ or a translation of a term.
 <dd>
   The <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurus-class.html">DictoSaurus</a> interface implements the <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/Dictionary-class.html">Dictionary</a> and <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect-class.html">AutoCorrect</a>
 interfaces.
-</dd>
-
-        <dt id="DictoSaurusBase">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurusBase-class.html">DictoSaurusBase</a></span> 
-
-</dt>
-<dd>
-  Implements <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurus-class.html">DictoSaurus</a> by mixing in <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurusMixin-class.html">DictoSaurusMixin</a> and
-<a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrectMixin-class.html">AutoCorrectMixin</a>.
-</dd>
-
-        <dt id="DictoSaurusMixin">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurusMixin-class.html">DictoSaurusMixin</a></span> 
-
-</dt>
-<dd>
-  A mixin class that implements <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurus/expandTerm.html">DictoSaurus.expandTerm</a>.
-</dd>
-
-        <dt id="English">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/English-class.html">English</a></span> 
-
-</dt>
-<dd>
-  A <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextAnalyzer-class.html">TextAnalyzer</a> implementation for <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/English-class.html">English</a> language analysis.
-</dd>
-
-        <dt id="Language">
-  <span class="name "><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/Language-class.html">Language</a></span> 
-
-</dt>
-<dd>
-  <em>Code in this file was forked from the dart:ui library to provide a DART
-version of the <a href="https://api.flutter.dev/flutter/dart-ui/Language-class.html">Language</a>
-class.</em>
 </dd>
 
         <dt id="OxfordDictionaries">
@@ -182,75 +112,6 @@ provider.
 API
 </dd>
 
-        <dt id="Porter2Stemmer">
-  <span class="name "><a href="https://pub.dev/documentation/porter_2_stemmer/3.0.1/porter_2_stemmer/Porter2Stemmer-class.html">Porter2Stemmer</a></span> 
-
-</dt>
-<dd>
-  DART implementation of the Porter Stemming Algorithm
-(see <a href="https://snowballstem.org/algorithms/)">https://snowballstem.org/algorithms/)</a>, used for reducing a word to
-its word stem, base or root form.
-</dd>
-
-        <dt id="Pronunciation">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/Pronunciation-class.html">Pronunciation</a></span> 
-
-</dt>
-<dd>
-  Object model for a <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/Pronunciation/term.html">term</a> variant's pronunciation.
-</dd>
-
-        <dt id="PronunciationBase">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/PronunciationBase-class.html">PronunciationBase</a></span> 
-
-</dt>
-<dd>
-  Abstract base class with <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/PronunciationMixin-class.html">PronunciationMixin</a>.
-</dd>
-
-        <dt id="PronunciationMixin">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/PronunciationMixin-class.html">PronunciationMixin</a></span> 
-
-</dt>
-<dd>
-  Abstract/mixin class implements <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/Pronunciation-class.html">Pronunciation</a>.
-</dd>
-
-        <dt id="SimilarityIndex">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/SimilarityIndex-class.html">SimilarityIndex</a></span> 
-
-</dt>
-<dd>
-  Object model for a suggestion as alternate for a term. Used in spelling
-correction and term expansion.
-</dd>
-
-        <dt id="TermSimilarity">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarity-class.html">TermSimilarity</a></span> 
-
-</dt>
-<dd>
-  A static/abstract class that exposes methods for computing similarity of
-terms.
-</dd>
-
-        <dt id="TermSimilarityBase">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityBase-class.html">TermSimilarityBase</a></span> 
-
-</dt>
-<dd>
-  Implementation class for TermSimilarity unnamed factory constructor.
-</dd>
-
-        <dt id="TermSimilarityMixin">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityMixin-class.html">TermSimilarityMixin</a></span> 
-
-</dt>
-<dd>
-  Mixin class that implements the <code>==</code> operator, <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityMixin/compareTo.html">compareTo</a>, <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityMixin/hashCode.html">hashCode</a> and
-<a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityMixin/toJson.html">toJson</a>.
-</dd>
-
         <dt id="TermVariant">
   <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariant-class.html">TermVariant</a></span> 
 
@@ -258,96 +119,6 @@ terms.
 <dd>
   A definition for a defintion and/or part-of-speech variant of a term, used
 in a <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> object.
-</dd>
-
-        <dt id="TermVariantBase">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariantBase-class.html">TermVariantBase</a></span> 
-
-</dt>
-<dd>
-  Abstract implementation class of <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariant-class.html">TermVariant</a> that implements the
-<code>==</code> operator and <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariantMixin/hashCode.html">hashCode</a>.
-</dd>
-
-        <dt id="TermVariantMixin">
-  <span class="name "><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariantMixin-class.html">TermVariantMixin</a></span> 
-
-</dt>
-<dd>
-  Abstract mixin class of <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariant-class.html">TermVariant</a> that implements the
-<code>==</code> operator and <a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariantMixin/hashCode.html">hashCode</a>.
-</dd>
-
-        <dt id="TextAnalyzer">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextAnalyzer-class.html">TextAnalyzer</a></span> 
-
-</dt>
-<dd>
-  An interface exposes language-specific properties and methods used in
-text analysis:
-</dd>
-
-        <dt id="TextDocument">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument-class.html">TextDocument</a></span> 
-
-</dt>
-<dd>
-  The <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument-class.html">TextDocument</a> object model enumerates properties for analysing a text
-document:
-</dd>
-
-        <dt id="TextDocumentBase">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocumentBase-class.html">TextDocumentBase</a></span> 
-
-</dt>
-<dd>
-  An abstract implementation of <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument-class.html">TextDocument</a> that uses <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocumentMixin-class.html">TextDocumentMixin</a>.
-</dd>
-
-        <dt id="TextDocumentMixin">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocumentMixin-class.html">TextDocumentMixin</a></span> 
-
-</dt>
-<dd>
-  The <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocumentMixin-class.html">TextDocumentMixin</a> provides implementations of the
-<a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument/averageSentenceLength.html">TextDocument.averageSentenceLength</a>, <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument/averageSyllableCount.html">TextDocument.averageSyllableCount</a>,
-<a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument/wordCount.html">TextDocument.wordCount</a>, <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument/fleschReadingEaseScore.html">TextDocument.fleschReadingEaseScore</a> and
-<a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument/fleschKincaidGradeLevel.html">TextDocument.fleschKincaidGradeLevel</a> methods.
-</dd>
-
-        <dt id="TextTokenizer">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizer-class.html">TextTokenizer</a></span> 
-
-</dt>
-<dd>
-  Interface for a text analyser class that extracts tokens from text for use
-in full-text search queries and indexes:
-</dd>
-
-        <dt id="TextTokenizerBase">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizerBase-class.html">TextTokenizerBase</a></span> 
-
-</dt>
-<dd>
-  A <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizer-class.html">TextTokenizer</a> implementation that mixes in <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizerMixin-class.html">TextTokenizerMixin</a>, which
-implements <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizer/tokenize.html">TextTokenizer.tokenize</a> and <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizer/tokenizeJson.html">TextTokenizer.tokenizeJson</a>.
-</dd>
-
-        <dt id="TextTokenizerMixin">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizerMixin-class.html">TextTokenizerMixin</a></span> 
-
-</dt>
-<dd>
-  A mixin class that implements <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizer/tokenize.html">TextTokenizer.tokenize</a> and
- <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizer/tokenizeJson.html">TextTokenizer.tokenizeJson</a>.
-</dd>
-
-        <dt id="Token">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/Token-class.html">Token</a></span> 
-
-</dt>
-<dd>
-  A <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/Token-class.html">Token</a> represents a <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/Token/term.html">term</a> (word) present in a text source:
 </dd>
 
       </dl>
@@ -377,15 +148,6 @@ implements <a href="https://pub.dev/documentation/text_analysis/0.18.0/text_anal
 <dd>
   In grammar, a <code>part-of-speech</code> is a category of words that have similar
 grammatical properties.
-</dd>
-
-        <dt id="PoSTag">
-  <span class="name "><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/PoSTag.html">PoSTag</a></span> 
-
-</dt>
-<dd>
-  Part of speech tags are used in natural language processing as part of
-<code>Part-of-Speech tagging</code>.
 </dd>
 
       </dl>
@@ -421,39 +183,11 @@ grammatical properties.
     <h5>oxford_dictionaries library</h5>
     <ol>
   <li class="section-title"><a href="../oxford_dictionaries/oxford_dictionaries-library.html#classes">Classes</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrect-class.html">AutoCorrect</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrectBase-class.html">AutoCorrectBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/AutoCorrectMixin-class.html">AutoCorrectMixin</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/Dictionary-class.html">Dictionary</a></li>
   <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntryBase-class.html">DictionaryEntryBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictionaryEntryMixin-class.html">DictionaryEntryMixin</a></li>
   <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurus-class.html">DictoSaurus</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurusBase-class.html">DictoSaurusBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/DictoSaurusMixin-class.html">DictoSaurusMixin</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/English-class.html">English</a></li>
-  <li><a href="https://pub.dev/documentation/gmconsult_dart_core/0.0.6/dart_core/Language-class.html">Language</a></li>
   <li><a href="../oxford_dictionaries/OxfordDictionaries-class.html">OxfordDictionaries</a></li>
   <li><a href="../oxford_dictionaries/OxfordDictionariesLanguage-class.html">OxfordDictionariesLanguage</a></li>
-  <li><a href="https://pub.dev/documentation/porter_2_stemmer/3.0.1/porter_2_stemmer/Porter2Stemmer-class.html">Porter2Stemmer</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/Pronunciation-class.html">Pronunciation</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/PronunciationBase-class.html">PronunciationBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/PronunciationMixin-class.html">PronunciationMixin</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/SimilarityIndex-class.html">SimilarityIndex</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarity-class.html">TermSimilarity</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityBase-class.html">TermSimilarityBase</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TermSimilarityMixin-class.html">TermSimilarityMixin</a></li>
   <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariant-class.html">TermVariant</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariantBase-class.html">TermVariantBase</a></li>
-  <li><a href="https://pub.dev/documentation/dictosaurus/0.0.20+1/dictosaurus/TermVariantMixin-class.html">TermVariantMixin</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextAnalyzer-class.html">TextAnalyzer</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocument-class.html">TextDocument</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocumentBase-class.html">TextDocumentBase</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextDocumentMixin-class.html">TextDocumentMixin</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizer-class.html">TextTokenizer</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizerBase-class.html">TextTokenizerBase</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/TextTokenizerMixin-class.html">TextTokenizerMixin</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/Token-class.html">Token</a></li>
 
 
 
@@ -463,7 +197,6 @@ grammatical properties.
   <li class="section-title"><a href="../oxford_dictionaries/oxford_dictionaries-library.html#enums">Enums</a></li>
   <li><a href="../oxford_dictionaries/OxfordDictionariesEndpoint.html">OxfordDictionariesEndpoint</a></li>
   <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/PartOfSpeech.html">PartOfSpeech</a></li>
-  <li><a href="https://pub.dev/documentation/text_analysis/0.18.0/text_analysis/PoSTag.html">PoSTag</a></li>
 
 
 </ol>
