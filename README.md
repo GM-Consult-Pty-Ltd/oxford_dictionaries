@@ -59,13 +59,14 @@ import 'package:oxford_dictionaries/endpoints.dart';
 
 ```
 
-Hydrate a `OxfordDictionaries` instance get the `DictionaryEntry` for "swimming" from the `OxfordDictionariesEndpoint.words` endpoint:
+Hydrate a `OxfordDictionaries` instance and get the `DictionaryEntry` for "swimming" from the `OxfordDictionariesEndpoint.words` endpoint:
 
 ```dart
 
-  // hydrate a `OxfordDictionaries` instance with api keys and a language
-  // [sign up for an account](https://developer.oxforddictionaries.com/#plans)
+  // sign up for an account at (https://developer.oxforddictionaries.com/#plans)
   // to obtain API keys
+
+  // hydrate a `OxfordDictionaries` instance with api keys and a language
   final dictionary = OxfordDictionaries(
       appId: appId, appKey: appKey, language: OxfordDictionariesLanguage.en_GB);
 
