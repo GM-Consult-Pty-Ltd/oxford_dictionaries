@@ -13,6 +13,7 @@ doc/images/
 
 <!-- # Folder with implementation code for testing and examples. -->
 impl/
+dev/
 
 <!-- data used for testing -->
 test/data/

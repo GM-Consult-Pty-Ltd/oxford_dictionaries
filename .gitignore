@@ -2,13 +2,12 @@
 # Copyright (c) 2022, GM Consult Pty Ltd
 # All rights reserved. 
 
-# Secret keys.
+# Secret keys
 test/keys/
 lib/keys/
 
 # Folder with implementation code for testing and examples.
 impl/
-dev/
 
 # Files and directories created by pub.
 .dart_tool/
