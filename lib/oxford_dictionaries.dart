@@ -9,8 +9,5 @@
 /// Also exports the `dictosaurus` package.
 library oxford_dictionaries;
 
-export 'src/_index.dart'
-    show
-        OxfordDictionaries,
-        OxFordDictionariesEndpoint;
+export 'src/_index.dart' show OxfordDictionaries, OxFordDictionariesEndpoint;
 export 'package:dictosaurus/dictosaurus.dart';
