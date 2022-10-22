@@ -4,18 +4,17 @@
 
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'endpoint.dart';
+import 'oxford_dictionaries_endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
-/// Retrieve possible headword matches for a given string of text.
+/// Retrieve possible headword matches for a search term.
 ///
 /// The results are calculated using headword matching, fuzzy matching, and
-/// lemmatization
-
-class Search extends Endpoint<List<String>> {
+/// lemmatization.
+class SearchEndpoint extends OdApiEndpoint<List<String>> {
 //
 
-  /// Queries the [Search] for a [List<String>] for the [term] and
+  /// Queries the [SearchEndpoint] for a [List<String>] for the [term] and
   /// optional parameters.
   static Future<List<String>> query(String term, Map<String, String> apiKeys,
       {Language language = Language.en_US,
@@ -31,14 +30,15 @@ class Search extends Endpoint<List<String>> {
         '[offset] must be null or between 0 and 10,000 inclusive');
     assert(((limit ?? 0) + (offset ?? 0) <= 10000),
         'Sum of limit and offset must be less that 10,000');
-    return await Search._(term, apiKeys, language, prefix, limit, offset)
+    return await SearchEndpoint._(
+                term, apiKeys, language, prefix, limit, offset)
             .get() ??
         [];
   }
 
   /// Const default generative constructor.
-  Search._(this.term, this.headers, this.language, this.prefix, this.limit,
-      this.offset);
+  SearchEndpoint._(this.term, this.headers, this.language, this.prefix,
+      this.limit, this.offset);
 
   @override
   final String term;
@@ -78,7 +78,7 @@ class Search extends Endpoint<List<String>> {
   }
 
   @override
-  OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
+  OxfordDictionariesEndpoint get endpoint => OxfordDictionariesEndpoint.entries;
 
   @override
   JsonDeserializer<List<String>> get deserializer => (json) {

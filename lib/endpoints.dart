@@ -6,4 +6,11 @@
 library endpoints;
 
 export 'src/endpoints/_index.dart'
-    show Entries, Lemmas, Search, Thesaurus, Translations, Words;
+    show
+        EntriesEndpoint,
+        LemmasEndpoint,
+        SearchEndpoint,
+        ThesaurusEndpoint,
+        TranslationsEndpoint,
+        WordsEndpoint,
+        OxfordDictionariesEndpoint;

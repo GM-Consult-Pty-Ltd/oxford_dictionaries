@@ -4,7 +4,7 @@
 
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'endpoint.dart';
+import 'oxford_dictionaries_endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
 /// Check if a word exists in the dictionary, or what 'root' form it links to
@@ -21,22 +21,23 @@ import 'package:dictosaurus/dictosaurus.dart';
 /// using 'OR' operators. For example, a combination of filters like
 /// '?grammaticalFeatures=singular&lexicalCategory=noun,verb' will return
 /// entries which match the query ('noun' OR 'verb') AND 'singular'.
-class Lemmas extends Endpoint<DictionaryEntry> {
+class LemmasEndpoint extends OdApiEndpoint<DictionaryEntry> {
 //
 
-  /// Queries the [Lemmas] for a [DictionaryEntry] for the [term] and
+  /// Queries the [LemmasEndpoint] for a [DictionaryEntry] for the [term] and
   /// optional parameters.
   static Future<DictionaryEntry?> query(
           String term, Map<String, String> apiKeys,
           {Language language = Language.en_US,
           Iterable<String>? grammaticalFeatures,
           PartOfSpeech? lexicalCategory}) =>
-      Lemmas._(term, apiKeys, language, grammaticalFeatures, lexicalCategory)
+      LemmasEndpoint._(
+              term, apiKeys, language, grammaticalFeatures, lexicalCategory)
           .get();
 
   /// Const default generative constructor.
-  Lemmas._(this.term, this.headers, this.language, this.grammaticalFeatures,
-      this.lexicalCategory);
+  LemmasEndpoint._(this.term, this.headers, this.language,
+      this.grammaticalFeatures, this.lexicalCategory);
 
   @override
   final String term;
@@ -88,7 +89,7 @@ class Lemmas extends Endpoint<DictionaryEntry> {
   }
 
   @override
-  OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
+  OxfordDictionariesEndpoint get endpoint => OxfordDictionariesEndpoint.entries;
 
   @override
   JsonDeserializer<DictionaryEntry> get deserializer =>

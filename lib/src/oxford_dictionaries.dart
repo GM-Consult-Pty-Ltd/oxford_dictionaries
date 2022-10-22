@@ -9,8 +9,12 @@ import 'package:oxford_dictionaries/src/_index.dart';
 import 'dart:async';
 import 'endpoints/_index.dart';
 
-/// Implements [Dictionary] with the `Oxford Dictionaries` API as dictionary
+/// Implements [DictoSaurus] with the `Oxford Dictionaries` API as dictionary
 /// provider.
+///
+/// To use this library you need to sign up for an account at
+/// (https://developer.oxforddictionaries.com/#plans) to get an [appKey] and
+/// [appId].
 ///
 /// See: https://developer.oxforddictionaries.com/.
 class OxfordDictionaries implements DictoSaurus {
@@ -61,19 +65,19 @@ class OxfordDictionaries implements DictoSaurus {
   /// Returns a [DictionaryEntry] for [term].
   @override
   Future<DictionaryEntry?> getEntry(String term,
-      [OxFordDictionariesEndpoint? endpoint]) async {
+      [OxfordDictionariesEndpoint? endpoint]) async {
     // DictionaryEntry? retVal;
     switch (endpoint) {
-      case OxFordDictionariesEndpoint.lemmas:
-        return await Lemmas.query(term, apiKeys);
-      case OxFordDictionariesEndpoint.thesaurus:
-        return await Thesaurus.query(term, apiKeys);
-      case OxFordDictionariesEndpoint.words:
-        return await Words.query(term, apiKeys);
-      case OxFordDictionariesEndpoint.entries:
-        return await Entries.query(term, apiKeys);
+      case OxfordDictionariesEndpoint.lemmas:
+        return await LemmasEndpoint.query(term, apiKeys);
+      case OxfordDictionariesEndpoint.thesaurus:
+        return await ThesaurusEndpoint.query(term, apiKeys);
+      case OxfordDictionariesEndpoint.words:
+        return await WordsEndpoint.query(term, apiKeys);
+      case OxfordDictionariesEndpoint.entries:
+        return await EntriesEndpoint.query(term, apiKeys);
       default:
-        return await Entries.query(term, apiKeys);
+        return await EntriesEndpoint.query(term, apiKeys);
     }
   }
 
@@ -82,7 +86,7 @@ class OxfordDictionaries implements DictoSaurus {
     final retVal = <String>{term};
     retVal.add(term);
     final synonyms =
-        (await getEntry(term, OxFordDictionariesEndpoint.thesaurus))
+        (await getEntry(term, OxfordDictionariesEndpoint.thesaurus))
             ?.allSynonyms()
             .where((element) => !element.contains(' '));
     if (synonyms != null) {
@@ -99,14 +103,14 @@ class OxfordDictionaries implements DictoSaurus {
 
   @override
   Future<List<String>> startsWith(String chars, [int limit = 10]) =>
-      Search.query(chars, apiKeys, limit: limit, prefix: true);
+      SearchEndpoint.query(chars, apiKeys, limit: limit, prefix: true);
 
   @override
   Future<List<String>> suggestionsFor(String term, [int limit = 10]) async {
     if (term.isEmpty) {
       return [];
     }
-    final terms = await Search.query(term, apiKeys, limit: limit);
+    final terms = await SearchEndpoint.query(term, apiKeys, limit: limit);
     if (language.languageCode == 'en') {
       terms.addAll(kGramIndexLoader(term));
     }
@@ -115,7 +119,7 @@ class OxfordDictionaries implements DictoSaurus {
 
   @override
   Future<Set<TermVariant>> translate(String term, Language targetLanguage) =>
-      Translations.translate(apiKeys,
+      TranslationsEndpoint.translate(apiKeys,
           term: term, sourceLanguage: language, targetLanguage: targetLanguage);
 
   /// Returns the [appId] and [appKey] as headers for the HTTP request.

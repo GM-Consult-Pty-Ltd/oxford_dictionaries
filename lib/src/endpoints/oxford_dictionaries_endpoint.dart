@@ -10,17 +10,17 @@ import 'package:gmconsult_dart_core/type_definitions.dart';
 import '../oxford_dictionaries_endpoint.dart';
 
 /// An interface for Oxford Dictionaries API endpoints
-abstract class Endpoint<T extends Object> extends ApiEndpointBase<T> {
+abstract class OdApiEndpoint<T extends Object> extends ApiEndpointBase<T> {
   //
 
   /// Uses the [Porter2Stemmer] to return the stem of [term].
   String get porter2stem => term.stemPorter2();
 
   /// Const default generative constructor.
-  const Endpoint();
+  const OdApiEndpoint();
 
-  /// The [OxFordDictionariesEndpoint] enumeration of the Endpoint.
-  OxFordDictionariesEndpoint get endpoint;
+  /// The [OxfordDictionariesEndpoint] enumeration of the OdApiEndpoint.
+  OxfordDictionariesEndpoint get endpoint;
 
   @override
   HttpProtocol get protocol => HttpProtocol.https;

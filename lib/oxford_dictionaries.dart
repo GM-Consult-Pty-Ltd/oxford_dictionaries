@@ -2,12 +2,14 @@
 // BSD 3-Clause License
 // All rights reserved
 
-//TODO: edit README.md
-
-/// Dictionary class that uses the Oxford Dictionaries RESTful API.
+/// Dictionary class that uses the Oxford Dictionaries REST API.
 ///
 /// Also exports the `dictosaurus` package.
 library oxford_dictionaries;
 
-export 'src/_index.dart' show OxfordDictionaries, OxFordDictionariesEndpoint;
+export 'src/_index.dart'
+    show
+        OxfordDictionaries,
+        OxfordDictionariesEndpoint,
+        OxfordDictionariesLanguage;
 export 'package:dictosaurus/dictosaurus.dart';

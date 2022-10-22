@@ -4,17 +4,17 @@
 
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'endpoint.dart';
+import 'oxford_dictionaries_endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
 /// Return translations for a given word.
 ///
 /// In the event that a word in the dataset does not have a direct translation,
 /// the response will be a definition in the target language.
-class Translations extends Endpoint<DictionaryEntry> {
+class TranslationsEndpoint extends OdApiEndpoint<DictionaryEntry> {
 //
 
-  /// Queries the [Translations] for a [DictionaryEntry] for the [term] and
+  /// Queries the [TranslationsEndpoint] for a [DictionaryEntry] for the [term] and
   /// optional parameters.
   static Future<DictionaryEntry?> query(
           String term, Map<String, String> apiKeys,
@@ -26,12 +26,21 @@ class Translations extends Endpoint<DictionaryEntry> {
           Iterable<String>? grammaticalFeatures,
           PartOfSpeech? lexicalCategory,
           Iterable<String>? domains}) =>
-      Translations._(term, targetLanguage, apiKeys, sourceLanguage, strictMatch,
-              fields, registers, grammaticalFeatures, lexicalCategory, domains)
+      TranslationsEndpoint._(
+              term,
+              targetLanguage,
+              apiKeys,
+              sourceLanguage,
+              strictMatch,
+              fields,
+              registers,
+              grammaticalFeatures,
+              lexicalCategory,
+              domains)
           .get();
 
   /// Const default generative constructor.
-  Translations._(
+  TranslationsEndpoint._(
       this.term,
       this._targetLanguage,
       this.headers,
@@ -59,7 +68,7 @@ class Translations extends Endpoint<DictionaryEntry> {
       Iterable<String>? grammaticalFeatures,
       PartOfSpeech? lexicalCategory,
       Iterable<String>? domains}) async {
-    final json = await Translations._(
+    final json = await TranslationsEndpoint._(
             term,
             targetLanguage,
             apiKeys,
@@ -192,8 +201,8 @@ class Translations extends Endpoint<DictionaryEntry> {
   }
 
   @override
-  OxFordDictionariesEndpoint get endpoint =>
-      OxFordDictionariesEndpoint.translations;
+  OxfordDictionariesEndpoint get endpoint =>
+      OxfordDictionariesEndpoint.translations;
 
   @override
   JsonDeserializer<DictionaryEntry> get deserializer =>

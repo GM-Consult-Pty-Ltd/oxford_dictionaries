@@ -49,7 +49,7 @@ class OxfordDictionariesLanguage {
   /// See https://developer.oxforddictionaries.com/documentation/languages for
   /// latest or to update this map.
   static const sourceLanguages = {
-    OxFordDictionariesEndpoint.entries: [
+    OxfordDictionariesEndpoint.entries: [
       OxfordDictionariesLanguage.en_GB,
       OxfordDictionariesLanguage.en_US,
       OxfordDictionariesLanguage.fr,
@@ -61,7 +61,7 @@ class OxfordDictionariesLanguage {
       OxfordDictionariesLanguage.sw,
       OxfordDictionariesLanguage.ta
     ],
-    OxFordDictionariesEndpoint.words: [
+    OxfordDictionariesEndpoint.words: [
       OxfordDictionariesLanguage.en_GB,
       OxfordDictionariesLanguage.en_US,
       OxfordDictionariesLanguage.fr,
@@ -73,7 +73,7 @@ class OxfordDictionariesLanguage {
       OxfordDictionariesLanguage.sw,
       OxfordDictionariesLanguage.ta
     ],
-    // OxFordDictionariesEndpoint.inflections: [
+    // OxfordDictionariesEndpoint.inflections: [
     //   OxfordDictionariesLanguage.en_GB,
     //   OxfordDictionariesLanguage.en_US,
     //   OxfordDictionariesLanguage.hi,
@@ -83,7 +83,7 @@ class OxfordDictionariesLanguage {
     //   OxfordDictionariesLanguage.sw,
     //   OxfordDictionariesLanguage.ta
     // ],
-    OxFordDictionariesEndpoint.lemmas: [
+    OxfordDictionariesEndpoint.lemmas: [
       OxfordDictionariesLanguage.en,
       OxfordDictionariesLanguage.de,
       OxfordDictionariesLanguage.hi,
@@ -96,7 +96,7 @@ class OxfordDictionariesLanguage {
       OxfordDictionariesLanguage.sw,
       OxfordDictionariesLanguage.ta
     ],
-    OxFordDictionariesEndpoint.search: [
+    OxfordDictionariesEndpoint.search: [
       OxfordDictionariesLanguage.en_GB,
       OxfordDictionariesLanguage.en_US,
       OxfordDictionariesLanguage.fr,
@@ -108,7 +108,7 @@ class OxfordDictionariesLanguage {
       OxfordDictionariesLanguage.sw,
       OxfordDictionariesLanguage.ta
     ],
-    // OxFordDictionariesEndpoint.searchTranslations: [
+    // OxfordDictionariesEndpoint.searchTranslations: [
     //   OxfordDictionariesLanguage.en,
     //   OxfordDictionariesLanguage.ar,
     //   OxfordDictionariesLanguage.zh,
@@ -134,8 +134,8 @@ class OxfordDictionariesLanguage {
     //   OxfordDictionariesLanguage.tk,
     //   OxfordDictionariesLanguage.ur
     // ],
-    // OxFordDictionariesEndpoint.searchThesaurus: [OxfordDictionariesLanguage.en],
-    OxFordDictionariesEndpoint.translations: [
+    // OxfordDictionariesEndpoint.searchThesaurus: [OxfordDictionariesLanguage.en],
+    OxfordDictionariesEndpoint.translations: [
       OxfordDictionariesLanguage.en,
       OxfordDictionariesLanguage.ar,
       OxfordDictionariesLanguage.zh,
@@ -161,8 +161,8 @@ class OxfordDictionariesLanguage {
       OxfordDictionariesLanguage.tk,
       OxfordDictionariesLanguage.ur
     ],
-    OxFordDictionariesEndpoint.thesaurus: [OxfordDictionariesLanguage.en],
-    // OxFordDictionariesEndpoint.sentences: [
+    OxfordDictionariesEndpoint.thesaurus: [OxfordDictionariesLanguage.en],
+    // OxfordDictionariesEndpoint.sentences: [
     //   OxfordDictionariesLanguage.en,
     //   OxfordDictionariesLanguage.es
     // ],
@@ -358,12 +358,9 @@ class OxfordDictionariesLanguage {
   static const yo = Language('yo');
 
   /// A constant value for 'und'.
-  /// - [languageCode] : 'und'.
   static const und = Language('und');
 
   /// A constant value for Spanish, Spain.
-  /// - [languageCode] : 'es'.
-  /// - [countryCode]  : 'ES'.
   // ignore: constant_identifier_names
   static const es_ES = Language('es', 'ES');
 }

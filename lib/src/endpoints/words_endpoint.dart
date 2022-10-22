@@ -4,15 +4,18 @@
 
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'endpoint.dart';
+import 'oxford_dictionaries_endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
-/// Retrieve definitions, pronunciations, example sentences, grammatical
-/// information and word origins.
-class Words extends Endpoint<DictionaryEntry> {
+/// Retrieve definitions, examples and other information for a given dictionary
+/// word or an inflection.
+///
+/// The response contains information about the lemmas to which the given
+/// word/inflected form is linked.
+class WordsEndpoint extends OdApiEndpoint<DictionaryEntry> {
 //
 
-  /// Queries the [Words] for a [DictionaryEntry] for the [term] and
+  /// Queries the [WordsEndpoint] for a [DictionaryEntry] for the [term] and
   /// optional parameters.
   static Future<DictionaryEntry?> query(
           String term, Map<String, String> apiKeys,
@@ -23,12 +26,12 @@ class Words extends Endpoint<DictionaryEntry> {
           Iterable<String>? grammaticalFeatures,
           PartOfSpeech? lexicalCategory,
           Iterable<String>? domains}) =>
-      Words._(term, apiKeys, language, strictMatch, fields, registers,
+      WordsEndpoint._(term, apiKeys, language, strictMatch, fields, registers,
               grammaticalFeatures, lexicalCategory, domains)
           .get();
 
   /// Const default generative constructor.
-  Words._(
+  WordsEndpoint._(
       this.term,
       this.headers,
       this.language,
@@ -141,7 +144,7 @@ class Words extends Endpoint<DictionaryEntry> {
   }
 
   @override
-  OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
+  OxfordDictionariesEndpoint get endpoint => OxfordDictionariesEndpoint.entries;
 
   @override
   JsonDeserializer<DictionaryEntry> get deserializer =>

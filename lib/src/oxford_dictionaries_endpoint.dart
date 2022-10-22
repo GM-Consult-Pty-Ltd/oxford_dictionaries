@@ -8,7 +8,7 @@ import 'package:oxford_dictionaries/src/_index.dart';
 /// Enumeration of the `Oxford Dictionaries` API endpoints.
 ///
 /// See: https://developer.oxforddictionaries.com/.
-enum OxFordDictionariesEndpoint {
+enum OxfordDictionariesEndpoint {
   /// Retrieve definitions, pronunciations, example sentences, grammatical
   /// information and word origins.
   entries,
@@ -16,13 +16,13 @@ enum OxFordDictionariesEndpoint {
   /// Retrieve the the possible lemmas for a given inflected word.
   lemmas,
 
-  /// Search for headword matches, translations or synonyms for a word.
+  /// SearchEndpoint for headword matches, translations or synonyms for a word.
   search,
 
-  // /// Search for headword matches, translations or synonyms for a word.
+  // /// SearchEndpoint for headword matches, translations or synonyms for a word.
   // searchTranslations,
 
-  // /// Search for headword matches, translations or synonyms for a word.
+  // /// SearchEndpoint for headword matches, translations or synonyms for a word.
   // searchThesaurus,
 
   /// Return translations for a given word.
@@ -51,7 +51,7 @@ enum OxFordDictionariesEndpoint {
 }
 
 ///
-extension OxfordLanguagesEndpointExtension on OxFordDictionariesEndpoint {
+extension OxfordLanguagesEndpointExtension on OxfordDictionariesEndpoint {
   ///
   bool languageAvailable(Language language) =>
       OxfordDictionariesLanguage.sourceLanguages[this]?.contains(language) ??

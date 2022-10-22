@@ -4,15 +4,15 @@
 
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'endpoint.dart';
+import 'oxford_dictionaries_endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
 /// Retrieve words that are similar/opposite in meaning to the input word
 /// (synonym /antonym).
-class Thesaurus extends Endpoint<DictionaryEntry> {
+class ThesaurusEndpoint extends OdApiEndpoint<DictionaryEntry> {
 //
 
-  /// Queries the [Thesaurus] for a [DictionaryEntry] for the [term] and
+  /// Queries the [ThesaurusEndpoint] for a [DictionaryEntry] for the [term] and
   /// optional parameters.
   static Future<DictionaryEntry?> query(
           String term, Map<String, String> apiKeys,
@@ -23,10 +23,10 @@ class Thesaurus extends Endpoint<DictionaryEntry> {
           Iterable<String>? grammaticalFeatures,
           PartOfSpeech? lexicalCategory,
           Iterable<String>? domains}) =>
-      Thesaurus._(term, apiKeys, language, strictMatch, fields).get();
+      ThesaurusEndpoint._(term, apiKeys, language, strictMatch, fields).get();
 
   /// Const default generative constructor.
-  Thesaurus._(
+  ThesaurusEndpoint._(
       this.term, this.headers, this.language, this.strictMatch, this.fields);
 
   @override
@@ -73,7 +73,7 @@ class Thesaurus extends Endpoint<DictionaryEntry> {
   }
 
   @override
-  OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
+  OxfordDictionariesEndpoint get endpoint => OxfordDictionariesEndpoint.entries;
 
   @override
   JsonDeserializer<DictionaryEntry> get deserializer =>
@@ -149,7 +149,7 @@ final _sampleBody = {
   'metadata': {
     'operation': 'retrieve',
     'provider': 'Oxford University Press',
-    'schema': 'Thesaurus'
+    'schema': 'ThesaurusEndpoint'
   },
   'results': [
     {

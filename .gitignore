@@ -8,6 +8,7 @@ lib/keys/
 
 # Folder with implementation code for testing and examples.
 impl/
+dev/
 
 # Files and directories created by pub.
 .dart_tool/

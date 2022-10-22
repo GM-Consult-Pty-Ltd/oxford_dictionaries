@@ -49,10 +49,9 @@ BSD 3-Clause License
 Copyright (c) 2022, GM Consult Pty Ltd
 All rights reserved. 
 -->
-<p><a href="https://github.com/GM-Consult-Pty-Ltd"><img src="https://raw.githubusercontent.com/GM-Consult-Pty-Ltd/oxford_dictionaries/main/doc/images/oxford_dictionaries_logo.png?raw=true" alt="GM Consult Pty Ltd" title="GM Consult Pty Ltd"></a></p>
-<h2 id="dictionary-class-that-uses-the-oxford-dictionaries-restful-api"><strong>Dictionary class that uses the Oxford Dictionaries RESTful API.</strong></h2>
+<p><a href="https://github.com/GM-Consult-Pty-Ltd"><img src="https://raw.githubusercontent.com/GM-Consult-Pty-Ltd/oxford_dictionaries/main/dev/images/package_header.png?raw=true" alt="Oxford Dictionaries API" title="Oxford Dictionaries API"></a></p>
+<h2 id="dictionary-class-that-uses-the-oxford-dictionaries-rest-api"><strong>Dictionary class that uses the Oxford Dictionaries REST API.</strong></h2>
 <p><em>Oxford Dictionaries, the Oxford Dictionaries logo, Oxford University Press, OUP, Oxford and/or any other names of products or services provided by Oxford University Press and referred to in this package are either trademarks or registered trademarks of Oxford University Press.</em></p>
-<p>Dictionary class that uses the Oxford Dictionaries RESTful API.</p>
 <p><em>THIS PACKAGE IS <strong>PRE-RELEASE</strong>, IN ACTIVE DEVELOPMENT AND SUBJECT TO DAILY BREAKING CHANGES.</em></p>
 <p>Skip to section:</p>
 <ul>
@@ -64,8 +63,19 @@ All rights reserved.
 <li><a href="#issues">Issues</a></li>
 </ul>
 <h2 id="overview">Overview</h2>
-<p>TODO: Overview</p>
-<p>Refer to the <a href="#references">references</a> to learn more about the theory behind this library.</p>
+<p>The <code>oxford_dictionaries</code> library uses endpoints of the <a href="https://developer.oxforddictionaries.com/">Oxford Dictionaries API</a> to return lexical data. To use this library you need to <a href="https://developer.oxforddictionaries.com/#plans">sign up for an account</a> to obtain API keys.</p>
+<p>The <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/OxfordDictionaries-class.html">OxfordDictionaries</a> class implements the <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictoSaurus-class.html">DictoSaurus</a> interface that includes includes <em>dictionary</em>, <em>thesaurus</em> and <em>term expansion</em> utilities.</p>
+<p>The implementation in this library uses six (out of nine) endpoints (in a separate <code>endpoints</code> mini-library) to populate a <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> object and provide some <a href="https://developer.oxforddictionaries.com/documentation/languages">translation services to/from English</a>:</p>
+<ul>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/EntriesEndpoint-class.html">EntriesEndpoint</a> retrieves definitions, pronunciations example sentences, grammatical information and word origins;</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/ThesaurusEndpoint-class.html">ThesaurusEndpoint</a> retrieves words that are similar/opposite in meaning to the input word (synonym /antonym);</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/LemmasEndpoint-class.html">LemmasEndpoint</a> checks if a word exists in the dictionary, or what 'root' form (lemma) it links to (e.g., swimming &gt; swim). The lemmas for a given inflected word. can be combined with other endpoints to retrieve more information;</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/WordsEndpoint-class.html">WordsEndpoint</a> retrieves definitions, examples and other information for a given dictionary  word or an inflection. The response contains information about the lemmas to which the given word/inflected form is linked;</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/SearchEndpoint-class.html">SearchEndpoint</a> retrieves possible headword matches for a search term. The results are calculated using headword matching, fuzzy matching, and lemmatization; and</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/TranslationsEndpoint-class.html">TranslationsEndpoint</a> retrieves translations for a given word.</li>
+</ul>
+<p>More information on the endpoints are available from the <a href="https://developer.oxforddictionaries.com/documentation">Oxford Dictionaries API Documentation</a>.</p>
+<p>Refer to the <a href="#references">references</a> for more backgound.</p>
 <p>(<em><a href="#">back to top</a></em>)</p>
 <h2 id="usage">Usage</h2>
 <p>In the <code>pubspec.yaml</code> of your flutter project, add the following dependency:</p>
@@ -73,20 +83,65 @@ All rights reserved.
   oxford_dictionaries: &lt;latest_version&gt;
 </code></pre>
 <p>In your code file add the following import:</p>
-<pre class="language-dart"><code class="language-dart">import 'package:oxford_dictionaries/oxford_dictionaries.dart';
+<pre class="language-dart"><code class="language-dart">// import the OxfordDictionaries class.
+import 'package:oxford_dictionaries/oxford_dictionaries.dart';
+
+// import the endpoint classes from the `endpoints` mini-library.
+import 'package:oxford_dictionaries/endpoints.dart';
+
 </code></pre>
-<p>TODO: describe usage.</p>
+<p>Hydrate a <code>OxfordDictionaries</code> instance get the <code>DictionaryEntry</code> for "swimming" from the <code>OxfordDictionariesEndpoint.words</code> endpoint:</p>
+<pre class="language-dart"><code class="language-dart">
+  // hydrate a `OxfordDictionaries` instance with api keys and a language
+  // [sign up for an account](https://developer.oxforddictionaries.com/#plans)
+  // to obtain API keys
+  final dictionary = OxfordDictionaries(
+      appId: appId, appKey: appKey, language: OxfordDictionariesLanguage.en_GB);
+
+  // get the `DictionaryEntry` for "swimming" from the `words` endpoint
+  final props =
+      await dictionary.getEntry('swimming', OxfordDictionariesEndpoint.words);
+
+  // print the defintions for "swimming"
+  print(props?.definitionsMap());
+
+  // prints
+  // {
+  //  PartOfSpeech.noun: 
+  //    {the sport or activity of propelling oneself through water using the limbs}, 
+  //  PartOfSpeech.verb: 
+  //    {propel the body through water by using the limbs, or (in the case of a fish or other aquatic animal) by using fins, tail, or other bodily movement, 
+  //    cross (a particular stretch of water) by swimming, 
+  //    float on or at the surface of a liquid, 
+  //    cause to float or move across water, be immersed in or covered with liquid, appear to reel or whirl before one's eyes, 
+  //    experience a dizzily confusing sensation in one's head}
+  // }
+
+
+</code></pre>
 <p>(<em><a href="#">back to top</a></em>)</p>
 <h2 id="api">API</h2>
-<p>The <a href="https://pub.dev/documentation/oxford_dictionaries/latest/">API</a> exposes</p>
-<p>TODO: describe the API</p>
+<p>The <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/OxfordDictionaries-class.html">OxfordDictionaries</a> class implements the <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictoSaurus-class.html">DictoSaurus</a> interface that includes includes <em>dictionary</em>, <em>thesaurus</em> and <em>term expansion</em> utilities.</p>
+<p>The implementation in this library uses  to populate a <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> object and provide some translation services to/from English.</p>
+<p><a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> is an object model for a term or word with <em>term</em>, <em>stem</em>, <em>lemma</em> and <em>language</em> properties. <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> also enumerates <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/TermVariant-class.html">term variants</a> with different values for <em>part-of-speech</em>, <em>definition</em>, <em>etymology</em>, <em>pronunciation</em>, <em>synonyms</em>, <em>antonyms</em> and <em>inflections</em>, each with one or more example <em>phrases</em>.</p>
+<p>The <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/OxfordDictionaries-class.html">OxfordDictionaries</a> class implements six (out of nine) endpoints from the <a href="https://developer.oxforddictionaries.com/documentation">Oxford Dictionaries API</a>in a separate <code>endpoints</code> mini-library:</p>
+<ul>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/EntriesEndpoint-class.html">EntriesEndpoint</a> retrieves definitions, pronunciations example sentences, grammatical information and word origins;</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/ThesaurusEndpoint-class.html">ThesaurusEndpoint</a> retrieves words that are similar/opposite in meaning to the input word (synonym /antonym);</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/LemmasEndpoint-class.html">LemmasEndpoint</a> checks if a word exists in the dictionary, or what 'root' form (lemma) it links to (e.g., swimming &gt; swim). The lemmas for a given inflected word. can be combined with other endpoints to retrieve more information;</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/WordsEndpoint-class.html">WordsEndpoint</a> retrieves definitions, examples and other information for a given dictionary  word or an inflection. The response contains information about the lemmas to which the given word/inflected form is linked;</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/SearchEndpoint-class.html">SearchEndpoint</a> retrieves possible headword matches for a search term. The results are calculated using headword matching, fuzzy matching, and lemmatization; and</li>
+<li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/TranslationsEndpoint-class.html">TranslationsEndpoint</a> retrieves translations for a given word.</li>
+</ul>
+<p>More information on the endpoints are available from the <a href="https://developer.oxforddictionaries.com/documentation">Oxford Dictionaries API Documentation</a>.</p>
+<p>Please refer to the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/">online API documentation</a> for more information.</p>
 <p>(<em><a href="#">back to top</a></em>)</p>
 <h2 id="definitions">Definitions</h2>
-<p>The following definitions are used throughout the <a href="https://pub.dev/documentation/text_analysis/latest/">documentation</a>:</p>
+<p>The following definitions are used throughout the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/">documentation</a>:</p>
 <ul>
 <li><code>corpus</code>- the collection of <code>documents</code> for which an <code>index</code> is maintained.</li>
 <li><code>character filter</code> - filters characters from text in preparation of tokenization.</li>
-<li><code>Damerau–Levenshtein distance</code> - a metric for measuring the <code>edit distance</code> between two <code>terms</code> by counting the minimum number of operations (insertions, deletions or substitutions of a single character, or transposition of two adjacent characters) required to change one <code>term</code> into the other.</li>
+<li><code>Damerau–Levenshtein distance</code> - a metric for measuring the <code>edit distance</code> between two <code>terms</code> by counting the minimum number of operations (insertions, deletions or substitutions of a single character, or transposition of two adjacent characters) required to change one <code>term</code> into the other (from <a href="https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance">Wikipedia</a>).</li>
 <li><code>dictionary (in an index)</code> - a hash of <code>terms</code> (<code>vocabulary</code>) to the frequency of occurence in the <code>corpus</code> documents.</li>
 <li><code>document</code> - a record in the <code>corpus</code>, that has a unique identifier (<code>docId</code>) in the <code>corpus</code>'s primary key and that contains one or more text fields that are indexed.</li>
 <li><code>document frequency (dFt)</code> - the number of documents in the <code>corpus</code> that contain a term.</li>
@@ -103,6 +158,7 @@ All rights reserved.
 <li><code>k-gram</code> - a sequence of (any) k consecutive characters from a <code>term</code>. A <code>k-gram</code> can start with "$", denoting the start of the term, and end with "$", denoting the end of the term. The 3-grams for "castle" are { $ca, cas, ast, stl, tle, le$ }.</li>
 <li><code>lemma  or lemmatizer</code> - lemmatisation (or lemmatization) in linguistics is the process of grouping together the inflected forms of a word so they can be analysed as a single item, identified by the word's lemma, or dictionary form (from <a href="https://en.wikipedia.org/wiki/Lemmatisation">Wikipedia</a>).</li>
 <li><code>Natural language processing (NLP)</code> is a subfield of linguistics, computer science, and artificial intelligence concerned with the interactions between computers and human language, in particular how to program computers to process and analyze large amounts of natural language data (from <a href="https://en.wikipedia.org/wiki/Natural_language_processing">Wikipedia</a>).</li>
+<li><code>Part-of-Speech (PoS) tagging</code> is the task of labelling every word in a sequence of words with a tag indicating what lexical syntactic category it assumes in the given sequence (from <a href="https://en.wikipedia.org/wiki/Part-of-speech_tagging">Wikipedia</a>).</li>
 <li><code>Phonetic transcription</code> - the visual representation of speech sounds (or phones) by means of symbols. The most common type of phonetic transcription uses a phonetic alphabet, such as the International Phonetic Alphabet (from <a href="https://en.wikipedia.org/wiki/Phonetic_transcription">Wikipedia</a>).</li>
 <li><code>postings</code> - a separate index that records which <code>documents</code> the <code>vocabulary</code> occurs in.  In a positional <code>index</code>, the postings also records the positions of each <code>term</code> in the <code>text</code> to create a positional inverted <code>index</code>.</li>
 <li><code>postings list</code> - a record of the positions of a <code>term</code> in a <code>document</code>. A position of a <code>term</code> refers to the index of the <code>term</code> in an array that contains all the <code>terms</code> in the <code>text</code>. In a zoned <code>index</code>, the <code>postings lists</code> records the positions of each <code>term</code> in the <code>text</code> a <code>zone</code>.</li>
@@ -137,6 +193,8 @@ All rights reserved.
 <li><a href="https://en.wikipedia.org/wiki/IETF_language_tag">Wikipedia (10), "<em>IETF language tag</em>", from Wikipedia, the free encyclopedia</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Phonetic_transcription">Wikipedia (11), "<em>Phonetic transcription</em>", from Wikipedia, the free encyclopedia</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Etymology">Wikipedia (12), "<em>Etymology</em>", from Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Part-of-speech_tagging">Wikipedia (13), "<em>Part-of-speech tagging</em>", from Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance">Wikipedia (14), "<em>Damerau–Levenshtein distance</em>", from Wikipedia, the free encyclopedia</a></li>
 </ul>
 <p>(<em><a href="#">back to top</a></em>)</p>
 <h2 id="issues">Issues</h2>
@@ -160,7 +218,7 @@ All rights reserved.
   <span class="name"><a href="oxford_dictionaries/oxford_dictionaries-library.html">oxford_dictionaries</a></span> 
 
 </dt>
-<dd>Dictionary class that uses the Oxford Dictionaries RESTful API.
+<dd>Dictionary class that uses the Oxford Dictionaries REST API.
 </dd>
 
         </dl>
@@ -197,7 +255,7 @@ All rights reserved.
 <footer>
   <span class="no-break">
     oxford_dictionaries
-      0.0.1-7
+      0.0.1
   </span>
 
   

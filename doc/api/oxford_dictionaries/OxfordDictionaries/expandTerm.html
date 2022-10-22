@@ -85,7 +85,7 @@ Future&lt;List&lt;String&gt;&gt; expandTerm(String term, [int limit = 5]) async 
   final retVal = &lt;String&gt;{term};
   retVal.add(term);
   final synonyms =
-      (await getEntry(term, OxFordDictionariesEndpoint.thesaurus))
+      (await getEntry(term, OxfordDictionariesEndpoint.thesaurus))
           ?.allSynonyms()
           .where((element) =&gt; !element.contains(&#39; &#39;));
   if (synonyms != null) {
@@ -165,7 +165,7 @@ Future&lt;List&lt;String&gt;&gt; expandTerm(String term, [int limit = 5]) async 
 <footer>
   <span class="no-break">
     oxford_dictionaries
-      0.0.1-7
+      0.0.1
   </span>
 
   

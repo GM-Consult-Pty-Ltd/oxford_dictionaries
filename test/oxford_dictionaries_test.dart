@@ -19,12 +19,12 @@ void main() {
   group('ENDPOINTS', () {
     //
 
-    test('Entries', () async {
+    test('EntriesEndpoint', () async {
       // define a correctly spelled term.
       final term = 'swim';
 
-      final props =
-          await Entries.query(term, GMConsultKeys.oxfordDictionariesHeaders);
+      final props = await EntriesEndpoint.query(
+          term, GMConsultKeys.oxfordDictionariesHeaders);
 
       expect(props != null, true);
       if (props != null) {
@@ -32,7 +32,7 @@ void main() {
       }
     });
 
-    test('Translations', () async {
+    test('TranslationsEndpoint', () async {
       // define a correctly spelled term.
       final term = 'swim';
 
@@ -42,12 +42,15 @@ void main() {
       print(translations.map((e) => e.term));
     });
 
-    test('Words', () async {
+    test('WordsEndpoint', () async {
       // define a correctly spelled term.
       final term = 'swimming';
 
-      final props =
-          await Words.query(term, GMConsultKeys.oxfordDictionariesHeaders);
+      final props = await OxfordDictionaries(
+              appId: appId,
+              appKey: appKey,
+              language: OxfordDictionariesLanguage.en_GB)
+          .getEntry(term, OxfordDictionariesEndpoint.words);
 
       expect(props != null, true);
       if (props != null) {
@@ -55,15 +58,15 @@ void main() {
       }
     });
 
-    test('Thesaurus', () async {
+    test('ThesaurusEndpoint', () async {
       // define a term with incorrect spelling.
       final misspeltterm = 'appel';
 
       // define a correctly spelled term.
       final term = 'low';
 
-      final props =
-          await Thesaurus.query(term, GMConsultKeys.oxfordDictionariesHeaders);
+      final props = await ThesaurusEndpoint.query(
+          term, GMConsultKeys.oxfordDictionariesHeaders);
 
       expect(props != null, true);
       if (props != null) {
@@ -71,12 +74,17 @@ void main() {
       }
     });
 
-    test('Lemmas', () async {
+    test('LemmasEndpoint', () async {
       // define a correctly spelled term.
       final term = 'swimming';
 
-      final props =
-          await Lemmas.query(term, GMConsultKeys.oxfordDictionariesHeaders);
+      final props = await OxfordDictionaries(
+              appId: appId,
+              appKey: appKey,
+              language: OxfordDictionariesLanguage.en_GB)
+          .getEntry(term, OxfordDictionariesEndpoint.lemmas);
+      // await LemmasEndpoint.query(
+      // term, GMConsultKeys.oxfordDictionariesHeaders);
 
       expect(props != null, true);
       if (props != null) {
@@ -84,11 +92,11 @@ void main() {
       }
     });
 
-    test('Search', () async {
+    test('SearchEndpoint', () async {
       // define a correctly spelled term.
       final term = 'teh';
 
-      final results = await Search.query(
+      final results = await SearchEndpoint.query(
           term, GMConsultKeys.oxfordDictionariesHeaders,
           prefix: true, limit: 100);
       print(results);
@@ -110,7 +118,7 @@ void _printTermProps(DictionaryEntry props) {
     {'Property': 'Term', 'TestResult': props.term},
     {'Property': 'Stem', 'TestResult': props.stem},
     {'Property': 'Definitions', 'TestResult': props.definitionsFor()},
-    {'Property': 'Lemmas', 'TestResult': props.lemmasOf()},
+    {'Property': 'LemmasEndpoint', 'TestResult': props.lemmasOf()},
     {'Property': 'Etymologies', 'TestResult': props.etymologiesOf()},
     {
       'Property': 'Pronunciations',

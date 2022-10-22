@@ -6,27 +6,32 @@ All rights reserved.
 
 *THIS PACKAGE IS **PRE-RELEASE**, IN ACTIVE DEVELOPMENT AND SUBJECT TO DAILY BREAKING CHANGES.*
 
-## 0.0.1-7
-**PRE-RELEASE**
-
-* Bumped `dictosaurus` to `0.0.20`.
-
-## 0.0.1-6
-**PRE-RELEASE**
+## 0.0.1
+**BETA RELEASE**
 
 ### *New*
-* `Entries` endpoint class.
-* `Lemmas` endpoint class.
-* `Search` endpoint class.
-* `Thesaurus` endpoint class.
-* `Translations` endpoint class.
-* `Words` endpoint class.
+* First stable release.
+
+### *Updated*
+* Documentation.
+* Tests.
+* Example
+
 
 ## 0.0.1-5
 **PRE-RELEASE**
 
 ### *New*
-* `Endpoint` class.
+* `OxfordDictionaries` class.
+* `OxfordDictionariesLanguage` class.
+* `OxfordDictionariesEndpoint` enumeration.
+* `EntriesEndpoint` class.
+* `LemmasEndpoint` class.
+* `SearchEndpoint` class.
+* `ThesaurusEndpoint` class.
+* `TranslationsEndpoint` class.
+* `WordsEndpoint` class.
+* `OdApiEndpoint` class.
 
 ### *Updated*
 * Documentation.

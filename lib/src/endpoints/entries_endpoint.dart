@@ -4,13 +4,13 @@
 
 import 'package:gmconsult_dart_core/type_definitions.dart';
 import 'package:oxford_dictionaries/src/_index.dart';
-import 'endpoint.dart';
+import 'oxford_dictionaries_endpoint.dart';
 import 'package:dictosaurus/dictosaurus.dart';
 
-/// Retrieve definitions, pronunciations  example sentences, grammatical
+/// Retrieve definitions, pronunciations example sentences, grammatical
 /// information and word origins.
 ///
-/// ONLY works for dictionary headwords. You may need to use the Lemmas
+/// ONLY works for dictionary headwords. You may need to use the LemmasEndpoint
 /// endpoint first to link an inflected form back to its headword (e.g., pixels
 /// --> pixel). Use filters to limit the entry information that is returned.
 /// For example, you may only require definitions and not everything else, or
@@ -24,10 +24,10 @@ import 'package:dictosaurus/dictosaurus.dart';
 /// using 'OR' operators. For example, a combination of filters like
 /// ?grammaticalFeatures=singular&lexicalCategory=noun,verb' will
 /// eturn entries which match the query ('noun' OR 'verb') AND 'singular'.
-class Entries extends Endpoint<DictionaryEntry> {
+class EntriesEndpoint extends OdApiEndpoint<DictionaryEntry> {
 //
 
-  /// Queries the [Entries] for a [DictionaryEntry] for the [term] and
+  /// Queries the [EntriesEndpoint] for a [DictionaryEntry] for the [term] and
   /// optional parameters.
   static Future<DictionaryEntry?> query(
           String term, Map<String, String> apiKeys,
@@ -38,12 +38,12 @@ class Entries extends Endpoint<DictionaryEntry> {
           Iterable<String>? grammaticalFeatures,
           PartOfSpeech? lexicalCategory,
           Iterable<String>? domains}) =>
-      Entries._(term, apiKeys, language, strictMatch, fields, registers,
+      EntriesEndpoint._(term, apiKeys, language, strictMatch, fields, registers,
               grammaticalFeatures, lexicalCategory, domains)
           .get();
 
   /// Const default generative constructor.
-  Entries._(
+  EntriesEndpoint._(
       this.term,
       this.headers,
       this.language,
@@ -156,7 +156,7 @@ class Entries extends Endpoint<DictionaryEntry> {
   }
 
   @override
-  OxFordDictionariesEndpoint get endpoint => OxFordDictionariesEndpoint.entries;
+  OxfordDictionariesEndpoint get endpoint => OxfordDictionariesEndpoint.entries;
 
   @override
   JsonDeserializer<DictionaryEntry> get deserializer =>

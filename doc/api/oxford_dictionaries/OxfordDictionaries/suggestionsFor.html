@@ -83,7 +83,7 @@ Future&lt;List&lt;String&gt;&gt; suggestionsFor(String term, [int limit = 10]) a
   if (term.isEmpty) {
     return [];
   }
-  final terms = await Search.query(term, apiKeys, limit: limit);
+  final terms = await SearchEndpoint.query(term, apiKeys, limit: limit);
   if (language.languageCode == &#39;en&#39;) {
     terms.addAll(kGramIndexLoader(term));
   }
@@ -155,7 +155,7 @@ Future&lt;List&lt;String&gt;&gt; suggestionsFor(String term, [int limit = 10]) a
 <footer>
   <span class="no-break">
     oxford_dictionaries
-      0.0.1-7
+      0.0.1
   </span>
 
   

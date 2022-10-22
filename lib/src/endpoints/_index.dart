@@ -2,6 +2,7 @@
 // BSD 3-Clause License
 // All rights reserved
 
+export 'oxford_dictionaries_endpoint.dart';
 export 'entries_endpoint.dart';
 export 'lemmas_endpoint.dart';
 export 'search_endpoint.dart';
