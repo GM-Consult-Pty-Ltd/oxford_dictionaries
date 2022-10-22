@@ -13,4 +13,4 @@ export 'src/endpoints/_index.dart'
         ThesaurusEndpoint,
         TranslationsEndpoint,
         WordsEndpoint,
-        OxfordDictionariesEndpoint;
+        OdApiEndpoint;

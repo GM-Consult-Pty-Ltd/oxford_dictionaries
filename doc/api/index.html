@@ -65,7 +65,7 @@ All rights reserved.
 <h2 id="overview">Overview</h2>
 <p>The <code>oxford_dictionaries</code> library uses endpoints of the <a href="https://developer.oxforddictionaries.com/">Oxford Dictionaries API</a> to return lexical data. To use this library you need to <a href="https://developer.oxforddictionaries.com/#plans">sign up for an account</a> to obtain API keys.</p>
 <p>The <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/OxfordDictionaries-class.html">OxfordDictionaries</a> class implements the <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictoSaurus-class.html">DictoSaurus</a> interface that includes includes <em>dictionary</em>, <em>thesaurus</em> and <em>term expansion</em> utilities.</p>
-<p>The implementation in this library uses six (out of nine) endpoints (in a separate <code>endpoints</code> mini-library) to populate a <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> object and provide some <a href="https://developer.oxforddictionaries.com/documentation/languages">translation services to/from English</a>:</p>
+<p>The implementation in this library uses six (out of nine) <a href="https://developer.oxforddictionaries.com/documentation">Oxford Dictionaries API endpoints</a> to populate a <a href="https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictionaryEntry-class.html">DictionaryEntry</a> object and provide some <a href="https://developer.oxforddictionaries.com/documentation/languages">translation services to/from English</a>:</p>
 <ul>
 <li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/EntriesEndpoint-class.html">EntriesEndpoint</a> retrieves definitions, pronunciations example sentences, grammatical information and word origins;</li>
 <li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/ThesaurusEndpoint-class.html">ThesaurusEndpoint</a> retrieves words that are similar/opposite in meaning to the input word (synonym /antonym);</li>
@@ -74,7 +74,7 @@ All rights reserved.
 <li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/SearchEndpoint-class.html">SearchEndpoint</a> retrieves possible headword matches for a search term. The results are calculated using headword matching, fuzzy matching, and lemmatization; and</li>
 <li>the <a href="https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/TranslationsEndpoint-class.html">TranslationsEndpoint</a> retrieves translations for a given word.</li>
 </ul>
-<p>More information on the endpoints are available from the <a href="https://developer.oxforddictionaries.com/documentation">Oxford Dictionaries API Documentation</a>.</p>
+<p>The endpoint classes are available in a separate <code>endpoints</code> mini-library. More information on the endpoints are available from the <a href="https://developer.oxforddictionaries.com/documentation">Oxford Dictionaries API Documentation</a>.</p>
 <p>Refer to the <a href="#references">references</a> for more backgound.</p>
 <p>(<em><a href="#">back to top</a></em>)</p>
 <h2 id="usage">Usage</h2>
@@ -255,7 +255,7 @@ import 'package:oxford_dictionaries/endpoints.dart';
 <footer>
   <span class="no-break">
     oxford_dictionaries
-      0.0.1
+      0.0.1+1
   </span>
 
   

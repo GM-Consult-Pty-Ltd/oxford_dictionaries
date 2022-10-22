@@ -25,7 +25,7 @@ The `oxford_dictionaries` library uses endpoints of the [Oxford Dictionaries API
 
 The [OxfordDictionaries](https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/OxfordDictionaries-class.html) class implements the [DictoSaurus](https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictoSaurus-class.html) interface that includes includes *dictionary*, *thesaurus* and *term expansion* utilities.
 
-The implementation in this library uses six (out of nine) endpoints (in a separate `endpoints` mini-library) to populate a [DictionaryEntry](https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictionaryEntry-class.html) object and provide some [translation services to/from English](https://developer.oxforddictionaries.com/documentation/languages):
+The implementation in this library uses six (out of nine) [Oxford Dictionaries API endpoints](https://developer.oxforddictionaries.com/documentation) to populate a [DictionaryEntry](https://pub.dev/documentation/dictosaurus/latest/dictosaurus/DictionaryEntry-class.html) object and provide some [translation services to/from English](https://developer.oxforddictionaries.com/documentation/languages):
 * the [EntriesEndpoint](https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/EntriesEndpoint-class.html) retrieves definitions, pronunciations example sentences, grammatical information and word origins;
 * the [ThesaurusEndpoint](https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/ThesaurusEndpoint-class.html) retrieves words that are similar/opposite in meaning to the input word (synonym /antonym);
 * the [LemmasEndpoint](https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/LemmasEndpoint-class.html) checks if a word exists in the dictionary, or what 'root' form (lemma) it links to (e.g., swimming > swim). The lemmas for a given inflected word. can be combined with other endpoints to retrieve more information;
@@ -33,7 +33,7 @@ The implementation in this library uses six (out of nine) endpoints (in a separa
 * the [SearchEndpoint](https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/SearchEndpoint-class.html) retrieves possible headword matches for a search term. The results are calculated using headword matching, fuzzy matching, and lemmatization; and
 * the [TranslationsEndpoint](https://pub.dev/documentation/oxford_dictionaries/latest/oxford_dictionaries/TranslationsEndpoint-class.html) retrieves translations for a given word.
 
-More information on the endpoints are available from the [Oxford Dictionaries API Documentation](https://developer.oxforddictionaries.com/documentation).
+The endpoint classes are available in a separate `endpoints` mini-library. More information on the endpoints are available from the [Oxford Dictionaries API Documentation](https://developer.oxforddictionaries.com/documentation).
 
 Refer to the [references](#references) for more backgound.
 
