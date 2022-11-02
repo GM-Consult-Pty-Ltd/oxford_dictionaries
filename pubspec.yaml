@@ -4,7 +4,7 @@
 
 name: oxford_dictionaries
 description: Dictionary class that uses the Oxford Dictionaries RESTful API.
-version: 0.0.1+3
+version: 0.0.1+4
 repository: https://github.com/GM-Consult-Pty-Ltd/oxford_dictionaries
 homepage: https://github.com/GM-Consult-Pty-Ltd
 issue_tracker: https://github.com/GM-Consult-Pty-Ltd/oxford_dictionaries/issues
@@ -14,15 +14,14 @@ environment:
 
 dependencies:
   # -----PubDev Packages (in alphabetic order) -----
-  dictosaurus: ^0.0.22
-  gmconsult_dart_core: ^0.0.5
-  porter_2_stemmer: ^3.0.1
+  dictosaurus: ^0.0.23
+  gmconsult_dart_core: ^0.0.7
+  porter_2_stemmer: ^3.0.2
 
 dev_dependencies:
-  gmconsult_dev: ^0.0.7+4
+  gmconsult_dev: ^0.0.7
   gmconsult_proprietary: 
-    version: ^0.0.1-5
+    version: ^0.0.1-6
     hosted: https://onepub.dev/api/jxxxpsdavu
-  lints: ^2.0.0
-  test: ^1.21.1
-  # text_indexing: ^0.16.0+2
+  lints: ^2.0.1
+  test: ^1.22.0
