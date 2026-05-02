@@ -9,8 +9,6 @@ All rights reserved.
 
 *Oxford Dictionaries, the Oxford Dictionaries logo, Oxford University Press, OUP, Oxford and/or any other names of products or services provided by Oxford University Press and referred to in this package are either trademarks or registered trademarks of Oxford University Press.*
 
-*THIS PACKAGE IS **PRE-RELEASE**, IN ACTIVE DEVELOPMENT AND SUBJECT TO DAILY BREAKING CHANGES.*
-
 Skip to section:
 - [Overview](#overview)
 - [Usage](#usage)
